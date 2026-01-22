@@ -1,172 +1,109 @@
-<!-- index.html (COMPLETO) — COPIA Y PEGA ENTERO -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Invitación · Urbano y María</title>
 
   <!-- Parisienne -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
 
-  <!-- IMPORTANTE: este nombre debe ser EXACTO -->
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- INTRO: SOBRE (MP4) -->
-  <div id="intro" class="intro" aria-label="Sobre de invitación">
-    <video id="introVideo" class="introVideo" src="./assets/Sobre.mp4" playsinline preload="auto"></video>
-  </div>
+<!-- INTRO -->
+<div class="intro" id="intro">
+  <video class="introVideo" id="introVideo" src="assets/Sobre.mp4" playsinline></video>
+</div>
 
-  <!-- APP -->
-  <div id="app" class="app" aria-hidden="true">
+<!-- APP -->
+<div class="app" id="app">
 
-    <!-- TOPBAR -->
-    <header class="topbar">
-      <button id="menuBtn" class="iconBtn" aria-label="Menú">☰</button>
-      <div class="logoText">U&amp;M</div>
-      <div class="rightSpacer"></div>
-    </header>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="iconBtn" id="openMenu">☰</button>
+    <div class="logoText">U&amp;M</div>
+  </header>
 
-    <!-- MENÚ OVERLAY (SOLO SE VE AL ABRIR) -->
-    <div id="menuOverlay" class="menuOverlay" aria-hidden="true">
-      <button id="closeBtn" class="closeBtn" aria-label="Cerrar">✕</button>
+  <!-- HOME -->
+  <main class="home">
+    <div class="invitation">
 
-      <nav class="menuNav" aria-label="Navegación">
-        <button class="menuLink" type="button" data-page="inicio">Inicio</button>
-        <button class="menuLink" type="button" data-page="asistencia">Asistencia</button>
-        <button class="menuLink" type="button" data-page="ceremonia">Ceremonia</button>
-        <button class="menuLink" type="button" data-page="banquete">Banquete</button>
-        <button class="menuLink" type="button" data-page="autobus">Autobús</button>
-        <button class="menuLink" type="button" data-page="itinerario">Itinerario</button>
-        <button class="menuLink" type="button" data-page="agradecimiento">Agradecimiento</button>
-      </nav>
+      <h1 class="names">Urbano y María</h1>
+      <p class="subtitle">Junto con nuestras familias</p>
+
+      <p class="body">
+        Tenemos el placer de invitaros a nuestro enlace matrimonial que tendrá lugar
+        <span class="dm">(D.m)</span><br>
+        el próximo día <span class="em">12 de septiembre de 2026</span> a las
+        <span class="em">17:00</span> de la tarde<br>
+        en la <span class="em">Parroquia San Lorenzo Mártir (Sevilla)</span>.
+      </p>
+
+      <p class="body">
+        A continuación, lo celebraremos todos juntos en la
+        <span class="em">Hacienda los Parrales</span>.
+      </p>
+
+      <div class="imageWrap">
+        <img src="assets/SanLorenzo.png" alt="San Lorenzo">
+      </div>
+
+      <p class="confirm">Se ruega Confirmación</p>
+
+      <div class="footer">
+        <div class="left">Urbano<br>668 556 740</div>
+        <div class="center">Sevilla, 2026</div>
+        <div class="right">María<br>662 393 762</div>
+      </div>
+
     </div>
+  </main>
 
-    <main class="pages">
+</div>
 
-      <!-- INICIO (SIN SCROLL, TODO EN 1 PANTALLA) -->
-      <section class="page is-active is-visible" data-page="inicio">
-        <div class="invitationFit">
+<!-- MENU -->
+<div class="menu" id="menu">
+  <button class="close" id="closeMenu">✕</button>
+  <nav>
+    <button>Inicio</button>
+    <button>Asistencia</button>
+    <button>Ceremonia</button>
+    <button>Banquete</button>
+    <button>Autobús</button>
+    <button>Itinerario</button>
+    <button>Agradecimiento</button>
+    <button id="replay">Reproducir sobre</button>
+  </nav>
+</div>
 
-          <div class="fitTop">
-            <h1 class="names">Urbano y María</h1>
-            <p class="subtitle">Junto con nuestras familias</p>
+<script>
+const intro = document.getElementById("intro");
+const video = document.getElementById("introVideo");
+const app = document.getElementById("app");
 
-            <p class="body">
-              Tenemos el placer de invitaros a nuestro enlace matrimonial que tendrá lugar <span class="dm">(D.m)</span>
-              <br>
-              el próximo día <span class="em">12 de septiembre de 2026</span> a las <span class="em">17:00</span> de la tarde
-              <br>
-              en la <span class="em">Parroquia San Lorenzo Mártir (Sevilla)</span>.
-            </p>
+intro.addEventListener("click", async () => {
+  try {
+    video.currentTime = 0;
+    await video.play();
+  } catch {}
+});
 
-            <p class="body">
-              A continuación, lo celebraremos todos juntos en la <span class="em">Hacienda los Parrales</span>.
-            </p>
-          </div>
+video.addEventListener("ended", () => {
+  intro.style.display = "none";
+  app.classList.add("show");
+});
 
-          <div class="fitImageWrap">
-            <img class="sanlorenzoFit" src="./assets/SanLorenzo.png" alt="Parroquia San Lorenzo Mártir, Sevilla" />
-          </div>
+document.getElementById("openMenu").onclick = () =>
+  document.getElementById("menu").classList.add("show");
 
-          <div class="fitBottom">
-            <p class="confirm">Se ruega Confirmación</p>
+document.getElementById("closeMenu").onclick = () =>
+  document.getElementById("menu").classList.remove("show");
 
-            <div class="footer">
-              <div class="left">Urbano<br>668&nbsp;556&nbsp;740</div>
-              <div class="center">Sevilla, 2026</div>
-              <div class="right">María<br>662&nbsp;393&nbsp;762</div>
-            </div>
-          </div>
+document.getElementById("replay").onclick = () => location.reload();
+</script>
 
-        </div>
-      </section>
-
-      <!-- PÁGINAS (VACÍAS POR AHORA) -->
-      <section class="page" data-page="asistencia"><div class="blankPage">Asistencia</div></section>
-      <section class="page" data-page="ceremonia"><div class="blankPage">Ceremonia</div></section>
-      <section class="page" data-page="banquete"><div class="blankPage">Banquete</div></section>
-      <section class="page" data-page="autobus"><div class="blankPage">Autobús</div></section>
-      <section class="page" data-page="itinerario"><div class="blankPage">Itinerario</div></section>
-      <section class="page" data-page="agradecimiento"><div class="blankPage">Agradecimiento</div></section>
-
-    </main>
-  </div>
-
-  <script>
-    // ===== INTRO SOBRE =====
-    const intro = document.getElementById("intro");
-    const introVideo = document.getElementById("introVideo");
-    const app = document.getElementById("app");
-    let started = false;
-
-    intro.addEventListener("click", async () => {
-      if (started) return;
-      started = true;
-      try {
-        introVideo.currentTime = 0;
-        await introVideo.play();
-      } catch (e) {
-        showApp();
-      }
-    });
-
-    introVideo.addEventListener("ended", () => {
-      intro.classList.add("fadeOut");
-      setTimeout(showApp, 620);
-    });
-
-    function showApp(){
-      intro.style.display = "none";
-      app.classList.add("show");
-      app.setAttribute("aria-hidden", "false");
-      window.scrollTo(0,0);
-    }
-
-    // ===== MENÚ OVERLAY =====
-    const menuBtn = document.getElementById("menuBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const menuOverlay = document.getElementById("menuOverlay");
-
-    menuBtn.addEventListener("click", () => menuOverlay.classList.add("show"));
-    closeBtn.addEventListener("click", () => menuOverlay.classList.remove("show"));
-    menuOverlay.addEventListener("click", (e) => {
-      if (e.target === menuOverlay) menuOverlay.classList.remove("show");
-    });
-
-    // ===== NAVEGACIÓN PÁGINAS (SIN LISTAS EN HOME) =====
-    const pages = Array.from(document.querySelectorAll(".page"));
-    let active = "inicio";
-
-    function getPage(name){ return pages.find(p => p.dataset.page === name); }
-
-    function setActive(target){
-      if (!target || target === active) return;
-      const current = getPage(active);
-      const next = getPage(target);
-      if (!current || !next) return;
-
-      current.classList.remove("is-visible");
-      setTimeout(() => {
-        current.classList.remove("is-active");
-        next.classList.add("is-active");
-        requestAnimationFrame(() => next.classList.add("is-visible"));
-        active = target;
-        window.scrollTo(0,0);
-      }, 220);
-    }
-
-    document.querySelectorAll(".menuLink").forEach(btn => {
-      btn.addEventListener("click", () => {
-        menuOverlay.classList.remove("show");
-        setActive(btn.dataset.page);
-      });
-    });
-  </script>
 </body>
 </html>
 

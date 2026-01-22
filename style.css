@@ -1,316 +1,208 @@
-/* style.css (COMPLETO) — COPIA Y PEGA ENTERO */
-*{ box-sizing:border-box; margin:0; padding:0; }
-
-:root{
-  --overlay: rgba(0,0,0,.35);
-  --text-soft: rgba(0,0,0,.55);
-  --text-main: rgba(0,0,0,.72);
-}
-
-body{
-  background:#fff;
-  font-family:"Parisienne", cursive;
-  color:var(--text-soft);
-}
-
-/* ===== INTRO SOBRE ===== */
-.intro{
-  position:fixed;
-  inset:0;
-  background:#000;
-  z-index:9999;
-  opacity:1;
-  transition:opacity 600ms ease;
-}
-.intro.fadeOut{
-  opacity:0;
-  pointer-events:none;
-}
-.introVideo{
-  width:100vw;
-  height:100vh;
-  object-fit:cover;
-  display:block;
-  background:#000;
-}
-
-/* ===== APP ===== */
-.app{ display:none; }
-.app.show{ display:block; }
-
-/* ===== TOPBAR ===== */
-.topbar{
-  position:fixed;
-  top:0; left:0; right:0;
-  height:56px;
-  display:flex;
-  align-items:center;
-  padding:0 14px;
-  background:rgba(255,255,255,.95);
-  border-bottom:1px solid rgba(0,0,0,.05);
-  z-index:10;
-}
-
-.iconBtn{
-  background:transparent;
-  border:0;
-  font-size:22px;
-  cursor:pointer;
-  color:var(--text-main);
-}
-
-.logoText{
-  font-size:20px;
-  margin-left:8px;
-  color:var(--text-main);
-}
-
-.rightSpacer{ margin-left:auto; }
-
-/* ===== PAGES ===== */
-.pages{ padding-top:56px; }
-
-.page{
-  display:none;
-  opacity:0;
-  transform:translateY(4px);
-  transition:opacity 220ms ease, transform 220ms ease;
-  background:#fff;
-}
-
-.page.is-active{ display:block; }
-.page.is-visible{ opacity:1; transform:translateY(0); }
-
-/* ===== HOME: 1 pantalla, sin scroll ===== */
-.page[data-page="inicio"]{
-  height:calc(100vh - 56px);
-  overflow:hidden;
-}
-
-/* Encaja todo */
-.invitationFit{
-  height:100%;
-  max-width:820px;
-  margin:0 auto;
-  padding:10px 16px;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-  text-align:center;
-}
-
-.names{
-  font-size:clamp(26px, 5.6vw, 38px);
-  line-height:1.05;
-  margin-bottom:4px;
-  color:var(--text-main);
-}
-
-.subtitle{
-  font-size:clamp(15px, 3.4vw, 20px);
-  margin-bottom:8px;
-  color:var(--text-soft);
-}
-
-.body{
-  font-size:clamp(13px, 3.3vw, 18px);
-  line-height:1.25;
-  margin-bottom:8px;
-  color:var(--text-soft);
-}
-
-.em{
-  color:var(--text-main);
-  font-weight:400;
-}
-
-.fitImageWrap{
-  flex:1;
-  min-height:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:4px 0;
-}
-
-.sanlorenzoFit{
-  width:92%;
-  max-height:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-}
-
-.confirm{
-  font-size:clamp(14px, 3.2vw, 18px);
-  margin-bottom:6px;
-  color:var(--text-soft);
-}
-
-.footer{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  gap:10px;
-  align-items:end;
-  font-size:clamp(12px, 3vw, 16px);
-  line-height:1.15;
-  color:var(--text-soft);
-}
-.footer .left{ text-align:left; }
-.footer .center{ text-align:center; }
-.footer .right{ text-align:right; }
-
-/* ===== PÁGINAS VACÍAS ===== */
-.blankPage{
-  padding:24px 18px;
-  font-size:32px;
-  color:var(--text-main);
-}
-
-/* ===== MENÚ OVERLAY (no debe verse nunca cerrado) ===== */
-.menuOverlay{
-  position:fixed;
-  inset:0;
-  display:none;
-  background:var(--overlay);
-  backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
-  z-index:20;
-}
-
-.menuOverlay.show{ display:block; }
-
-.closeBtn{
-  position:absolute;
-  top:10px;
-  left:10px;
-  width:44px;
-  height:44px;
-  background:transparent;
-  border:0;
-  font-size:22px;
-  color:#fff;
-  cursor:pointer;
-}
-
-.menuNav{
-  position:absolute;
-  top:70px;
-  left:22px;
-  display:flex;
-  flex-direction:column;
-  gap:14px;
-}
-
-/* Esto evita los “botones grises” por defecto */
-.menuLink{
-  background:transparent;
-  border:0;
-  padding:0;
-  cursor:pointer;
-  font-family:"Parisienne", cursive;
-  font-size:30px;
-  color:rgba(255,255,255,.95);
-  text-align:left;
-}
-
-/* ===== AJUSTES FINOS HOME (PEGAR AL FINAL) ===== */
-
-/* 1) Quitar la línea fea bajo el topbar */
-.topbar{
-    border-bottom: none !important;
-    box-shadow: none !important;
+/* =========================
+   RESET + VARIABLES
+========================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
   }
   
-  /* 2) Bajar un poco el bloque del nombre (más aire arriba) */
-  .invitationFit{
-    padding-top: 18px !important;   /* antes 10px */
-    justify-content: flex-start !important;
+  :root{
+    --text-main: rgba(0,0,0,.75);
+    --text-soft: rgba(0,0,0,.55);
+    --overlay: rgba(0,0,0,.35);
   }
   
-  /* 3) Reducir los huecos enormes entre texto ↔ imagen ↔ confirmación */
-  .fitTop{
-    margin-bottom: 6px !important;
-  }
-  
-  .fitImageWrap{
-    flex: 0 0 auto !important;      /* deja de “comerse” el espacio */
-    padding: 6px 0 !important;
-    margin: 0 !important;
-  }
-  
-  .sanlorenzoFit{
-    width: 92% !important;
-    max-height: 42vh !important;    /* controla el tamaño para que NO genere huecos */
-  }
-  
-  /* 4) Confirmación + footer más pegados a la imagen */
-  .fitBottom{
-    margin-top: 6px !important;
-  }
-  
-  .confirm{
-    margin: 6px 0 4px !important;
-  }
-  
-  .footer{
-    padding-bottom: 6px !important;
-  }
-  
-  /* ===== SIN SCROLL + TEXTO MÁS “EN CASCADA” (PEGAR AL FINAL) ===== */
-
-/* 1) Evitar scroll global */
-html, body{
+  html, body{
+    width: 100%;
     height: 100%;
-    overflow: hidden !important;
+    overflow: hidden; /* SIN SCROLL */
   }
   
-  /* 2) Quitar cualquier reborde del topbar */
+  body{
+    background: #fff;
+    font-family: "Parisienne", cursive;
+    color: var(--text-soft);
+  }
+  
+  /* =========================
+     INTRO – SOBRE
+  ========================= */
+  .intro{
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #000;
+  }
+  
+  .introVideo{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* =========================
+     APP
+  ========================= */
+  .app{
+    display: none;
+    height: 100%;
+  }
+  
+  .app.show{
+    display: block;
+  }
+  
+  /* =========================
+     TOPBAR
+  ========================= */
   .topbar{
-    border-bottom: none !important;
-    box-shadow: none !important;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    background: rgba(255,255,255,.95);
   }
   
-  /* 3) Home: encajar todo exacto */
-  .page[data-page="inicio"]{
-    height: calc(100vh - 56px) !important;
-    overflow: hidden !important;
+  .iconBtn{
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--text-main);
   }
   
-  /* 4) Reparto: que NO quede mega hueco abajo */
-  .invitationFit{
-    height: 100% !important;
-    padding-top: 18px !important;
-    padding-bottom: 14px !important;
-    justify-content: space-between !important; /* vuelve a “repartir” bien */
+  .logoText{
+    margin-left: 8px;
+    font-size: 20px;
+    color: var(--text-main);
   }
   
-  /* 5) Texto: más elegante, más compacto, y sin “D.m” suelto */
+  /* =========================
+     HOME (UNA PANTALLA)
+  ========================= */
+  .home{
+    height: calc(100vh - 56px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .invitation{
+    height: 100%;
+    max-width: 420px;
+    width: 100%;
+    padding: 14px 16px 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  /* TEXTO */
+  .names{
+    font-size: clamp(26px, 6vw, 36px);
+    line-height: 1.05;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+  
+  .subtitle{
+    font-size: clamp(14px, 3.8vw, 18px);
+    margin-bottom: 6px;
+  }
+  
   .body{
-    line-height: 1.18 !important;
-    margin-bottom: 6px !important;
+    font-size: clamp(13px, 3.6vw, 17px);
+    line-height: 1.18;
+    margin-bottom: 6px;
   }
   
-  /* Elimina el salto feo antes/después de (D.m) */
-  .body .dm{
-    display: inline !important;
-    white-space: nowrap !important;
+  .em{
+    color: var(--text-main);
+  }
+  
+  .dm{
+    white-space: nowrap;
     opacity: .85;
   }
   
-  /* 6) Imagen un pelín más grande para ocupar el espacio sin scroll */
-  .sanlorenzoFit{
-    width: 92% !important;
-    max-height: 46vh !important;
+  /* IMAGEN */
+  .imageWrap{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
-  /* 7) Parte inferior más pegada (menos aire muerto) */
+  .imageWrap img{
+    width: 94%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  
+  /* PIE */
   .confirm{
-    margin: 4px 0 2px !important;
+    font-size: clamp(14px, 3.5vw, 17px);
+    margin: 4px 0;
   }
+  
   .footer{
-    padding-bottom: 2px !important;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    font-size: clamp(12px, 3.2vw, 15px);
   }
+  
+  .footer .left{ text-align: left; }
+  .footer .center{ text-align: center; }
+  .footer .right{ text-align: right; }
+  
+  /* =========================
+     MENÚ OVERLAY
+  ========================= */
+  .menu{
+    position: fixed;
+    inset: 0;
+    display: none;
+    background: var(--overlay);
+    backdrop-filter: blur(6px);
+    z-index: 20;
+  }
+  
+  .menu.show{
+    display: block;
+  }
+  
+  .menu nav{
+    position: absolute;
+    top: 80px;
+    left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  
+  .menu button{
+    background: none;
+    border: none;
+    font-family: "Parisienne", cursive;
+    font-size: 30px;
+    color: white;
+    text-align: left;
+    cursor: pointer;
+  }
+  
+  .close{
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: white;
+    cursor: pointer;
+  }
+  
   
   
   
