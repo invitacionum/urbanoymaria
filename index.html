@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Invitación · Urbano y María</title>
 
-  <!-- Fuente Parisienne -->
+  <!-- Parisienne -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Parisienne&display=swap" rel="stylesheet">
@@ -14,128 +14,69 @@
 </head>
 <body>
 
-  <!-- INTRO MP4 PANTALLA COMPLETA -->
-  <div id="intro" class="intro">
-    <video
-      id="introVideo"
-      class="introVideo"
-      src="assets/Sobre.mp4"
-      playsinline
-      preload="auto">
-    </video>
-  </div>
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <button class="iconBtn">☰</button>
+    <div class="logoText">U&amp;M</div>
+    <div class="rightSpacer"></div>
+  </header>
 
-  <!-- APP -->
-  <div id="app" class="app">
+  <main class="pages">
 
-    <!-- TOP BAR -->
-    <header class="topbar">
-      <button id="menuBtn" class="iconBtn" aria-label="Abrir menú">
-        <svg viewBox="0 0 24 24">
-          <path d="M4 6h16M4 12h16M4 18h16"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"/>
-        </svg>
-      </button>
+    <section class="page is-active">
 
-      <div class="logoText">U&amp;M</div>
+      <div class="invitation">
 
-      <div class="rightSpacer"></div>
-    </header>
+        <h1 class="names">Urbano y María</h1>
 
-    <!-- MENÚ OVERLAY (SOLO TEXTO) -->
-    <div id="menuOverlay" class="menuOverlay">
-      <button id="closeBtn" class="closeBtn" aria-label="Cerrar menú">
-        <svg viewBox="0 0 24 24">
-          <path d="M6 6l12 12M18 6L6 18"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"/>
-        </svg>
-      </button>
+        <p class="subtitle">Junto con nuestras familias</p>
 
-      <nav class="menuNav">
-        <button class="menuLink" data-page="inicio">Inicio</button>
-        <button class="menuLink" data-page="asistencia">Asistencia</button>
-        <button class="menuLink" data-page="ceremonia">Ceremonia</button>
-        <button class="menuLink" data-page="banquete">Banquete</button>
-        <button class="menuLink" data-page="autobus">Autobús</button>
-        <button class="menuLink" data-page="itinerario">Itinerario</button>
-        <button class="menuLink" data-page="agradecimiento">Agradecimiento</button>
-      </nav>
-    </div>
+        <p class="body">
+          Tenemos el placer de invitaros a nuestro enlace matrimonial que tendrá lugar (D.m)
+          <br><br>
+          el próximo día <strong>12 de septiembre de 2026</strong> a las <strong>17:00</strong> de la tarde
+          <br>
+          en la <strong>Parroquia San Lorenzo Mártir (Sevilla)</strong>.
+        </p>
 
-    <!-- CONTENIDO -->
-    <main class="pages">
+        <p class="body">
+          A continuación, lo celebraremos todos juntos en la
+          <strong>Hacienda los Parrales</strong>.
+        </p>
 
-      <!-- INICIO: TEXTO + SAN LORENZO -->
-      <section class="page is-active is-visible" data-page="inicio">
-
-        <div class="invitation">
-
-          <h1 class="names">Urbano y María</h1>
-
-          <p class="subtitle">Junto con nuestras familias</p>
-
-          <p class="body">
-            Tenemos el placer de invitaros a nuestro enlace matrimonial que tendrá lugar (D.m)
-            <br><br>
-            el próximo día <strong>12 de septiembre de 2026</strong> a las <strong>17:00</strong> de la tarde
-            <br>
-            en la <strong>Parroquia San Lorenzo Mártir (Sevilla)</strong>.
-          </p>
-
-          <p class="body">
-            A continuación, lo celebraremos todos juntos en la
-            <strong>Hacienda los Parrales</strong>.
-          </p>
-
-          <p class="confirm">Se ruega Confirmación</p>
-
-          <div class="footer">
-            <div class="left">
-              <strong>Urbano</strong><br>
-              668 556 740
-            </div>
-
-            <div class="center">
-              Sevilla, 2026
-            </div>
-
-            <div class="right">
-              <strong>María</strong><br>
-              662 393 762
-            </div>
-          </div>
-
-        </div>
-
-        <!-- IMAGEN SAN LORENZO DEBAJO -->
+        <!-- IMAGEN SAN LORENZO EN MEDIO -->
         <img
           class="sanlorenzoImg"
           src="assets/SanLorenzo.png"
           alt="Parroquia San Lorenzo Mártir, Sevilla" />
 
-      </section>
+        <p class="confirm">Se ruega Confirmación</p>
 
-      <!-- PÁGINAS NUEVAS (VACÍAS DE MOMENTO) -->
-      <section class="page" data-page="asistencia"></section>
-      <section class="page" data-page="ceremonia"></section>
-      <section class="page" data-page="banquete"></section>
-      <section class="page" data-page="autobus"></section>
-      <section class="page" data-page="itinerario"></section>
-      <section class="page" data-page="agradecimiento"></section>
+        <div class="footer">
+          <div class="left">
+            Urbano<br>
+            668&nbsp;556&nbsp;740
+          </div>
 
-    </main>
+          <div class="center">
+            Sevilla, 2026
+          </div>
 
-  </div>
+          <div class="right">
+            María<br>
+            662&nbsp;393&nbsp;762
+          </div>
+        </div>
 
-  <script src="script.js"></script>
+      </div>
+
+    </section>
+
+  </main>
+
 </body>
 </html>
+
 
 
 
