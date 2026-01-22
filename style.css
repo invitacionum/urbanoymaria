@@ -1,211 +1,248 @@
 /* =========================
    RESET + VARIABLES
 ========================= */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  :root{
-    --text-main: rgba(0,0,0,.75);
-    --text-soft: rgba(0,0,0,.55);
-    --overlay: rgba(0,0,0,.35);
-  }
-  
-  html, body{
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* SIN SCROLL */
-  }
-  
-  body{
-    background: #fff;
-    font-family: "Parisienne", cursive;
-    color: var(--text-soft);
-  }
-  
-  /* =========================
-     INTRO – SOBRE
-  ========================= */
-  .intro{
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
-    background: #000;
-  }
-  
-  .introVideo{
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
-  }
-  
-  /* =========================
-     APP
-  ========================= */
-  .app{
-    display: none;
-    height: 100%;
-  }
-  
-  .app.show{
-    display: block;
-  }
-  
-  /* =========================
-     TOPBAR
-  ========================= */
-  .topbar{
-    height: 56px;
-    display: flex;
-    align-items: center;
-    padding: 0 14px;
-    background: rgba(255,255,255,.95);
-  }
-  
-  .iconBtn{
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: var(--text-main);
-  }
-  
-  .logoText{
-    margin-left: 8px;
-    font-size: 20px;
-    color: var(--text-main);
-  }
-  
-  /* =========================
-     HOME (UNA PANTALLA)
-  ========================= */
-  .home{
-    height: calc(100vh - 56px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .invitation{
-    height: 100%;
-    max-width: 420px;
-    width: 100%;
-    padding: 14px 16px 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  /* TEXTO */
-  .names{
-    font-size: clamp(26px, 6vw, 36px);
-    line-height: 1.05;
-    color: var(--text-main);
-    margin-bottom: 4px;
-  }
-  
-  .subtitle{
-    font-size: clamp(14px, 3.8vw, 18px);
-    margin-bottom: 6px;
-  }
-  
-  .body{
-    font-size: clamp(13px, 3.6vw, 17px);
-    line-height: 1.18;
-    margin-bottom: 6px;
-  }
-  
-  .em{
-    color: var(--text-main);
-  }
-  
-  .dm{
-    white-space: nowrap;
-    opacity: .85;
-  }
-  
-  /* IMAGEN */
-  .imageWrap{
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .imageWrap img{
-    width: 94%;
-    max-height: 100%;
-    object-fit: contain;
-  }
-  
-  /* PIE */
-  .confirm{
-    font-size: clamp(14px, 3.5vw, 17px);
-    margin: 4px 0;
-  }
-  
-  .footer{
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    font-size: clamp(12px, 3.2vw, 15px);
-  }
-  
-  .footer .left{ text-align: left; }
-  .footer .center{ text-align: center; }
-  .footer .right{ text-align: right; }
-  
-  /* =========================
-     MENÚ OVERLAY
-  ========================= */
-  .menu{
-    position: fixed;
-    inset: 0;
-    display: none;
-    background: var(--overlay);
-    backdrop-filter: blur(6px);
-    z-index: 20;
-  }
-  
-  .menu.show{
-    display: block;
-  }
-  
-  .menu nav{
-    position: absolute;
-    top: 80px;
-    left: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  
-  .menu button{
-    background: none;
-    border: none;
-    font-family: "Parisienne", cursive;
-    font-size: 30px;
-    color: white;
-    text-align: left;
-    cursor: pointer;
-  }
-  
-  .close{
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: none;
-    border: none;
-    font-size: 22px;
-    color: white;
-    cursor: pointer;
-  }
-  
-  
-  
-  
-  
-  
-  
+*{ margin:0; padding:0; box-sizing:border-box; }
+
+:root{
+  --text-main: rgba(0,0,0,.72);
+  --text-soft: rgba(0,0,0,.55);
+  --overlay: rgba(0,0,0,.35);
+}
+
+html, body{
+  height:100%;
+  width:100%;
+  overflow:hidden; /* SIN SCROLL */
+}
+
+body{
+  background:#fff;
+  font-family:"Parisienne", cursive;
+  color:var(--text-soft);
+}
+
+/* =========================
+   INTRO (SOBRE)
+========================= */
+.intro{
+  position:fixed;
+  inset:0;
+  background:#000;
+  z-index:9999;
+  opacity:1;
+  transition:opacity 520ms ease;
+}
+.intro.fadeOut{
+  opacity:0;
+  pointer-events:none;
+}
+.introVideo{
+  width:100vw;
+  height:100vh;
+  object-fit:cover;
+  display:block;
+  background:#000;
+}
+
+/* =========================
+   APP + TOPBAR
+========================= */
+.app{ display:none; height:100%; }
+.app.show{ display:block; }
+
+.topbar{
+  position:fixed;
+  top:0; left:0; right:0;
+  height:56px;
+  display:flex;
+  align-items:center;
+  padding:0 14px;
+  background:rgba(255,255,255,.95);
+  z-index:10;
+}
+
+.iconBtn{
+  background:transparent;
+  border:0;
+  font-size:22px;
+  cursor:pointer;
+  color:var(--text-main);
+}
+
+.logoText{
+  font-size:20px;
+  margin-left:8px;
+  color:var(--text-main);
+}
+
+.replayBtn{
+  margin-left:auto;
+  background:transparent;
+  border:0;
+  font-size:20px;
+  cursor:pointer;
+  color:var(--text-main);
+  opacity:.75;
+}
+.replayBtn:hover{ opacity:1; }
+
+/* =========================
+   PAGES
+========================= */
+.pages{
+  padding-top:56px;
+  height:100%;
+}
+
+.page{
+  display:none;
+  height:calc(100vh - 56px);
+  height:calc(100svh - 56px);
+  overflow:hidden; /* sin scroll */
+  background:#fff;
+
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity 220ms ease, transform 220ms ease;
+}
+.page.is-active{ display:block; }
+.page.is-visible{ opacity:1; transform:translateY(0); }
+
+/* =========================
+   INICIO: 2 IMÁGENES + TEXTO ABAJO (SIN ESPACIOS / SIN AIRE)
+========================= */
+.homeFit{
+  height:100%;
+  max-width:520px;
+  margin:0 auto;
+
+  /* CERO aire */
+  padding:0;
+  display:flex;
+  flex-direction:column;
+
+  /* CERO separación automática */
+  gap:0;
+}
+
+/* Cada imagen ocupa un bloque fijo relativo */
+.invImageWrap{
+  flex:0 0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  /* CERO márgenes */
+  margin:0;
+  padding:0;
+}
+
+/* Bloque 1: invitación (ajusta estas alturas si quieres) */
+.invBlock{
+  height:52%;
+  min-height:0;
+}
+
+/* Bloque 2: San Lorenzo */
+.sanBlock{
+  height:38%;
+  min-height:0;
+}
+
+/* Imágenes: encajan sin añadir espacios */
+.invImage, .sanImage{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  display:block;
+  margin:0;
+  padding:0;
+}
+
+/* Texto final (abajo) */
+.bottomText{
+  flex:1;
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  text-align:center;
+
+  /* CERO aire */
+  padding:0 12px 10px;
+}
+
+.confirm{
+  font-size:clamp(14px, 3.6vw, 18px);
+  margin:0 0 4px 0;  /* menos aire */
+  color:var(--text-soft);
+}
+
+.footer{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  gap:10px;
+  align-items:end;
+  font-size:clamp(12px, 3.2vw, 16px);
+  line-height:1.1;
+  color:var(--text-soft);
+}
+.footer .left{ text-align:left; }
+.footer .center{ text-align:center; }
+.footer .right{ text-align:right; }
+
+/* =========================
+   MENÚ OVERLAY (para luego)
+========================= */
+.menuOverlay{
+  position:fixed;
+  inset:0;
+  display:none;
+  background:var(--overlay);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+  z-index:20;
+}
+.menuOverlay.show{ display:block; }
+
+.closeBtn{
+  position:absolute;
+  top:10px;
+  left:10px;
+  width:44px;
+  height:44px;
+  background:transparent;
+  border:0;
+  font-size:22px;
+  color:#fff;
+  cursor:pointer;
+}
+
+.menuNav{
+  position:absolute;
+  top:70px;
+  left:22px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.menuLink{
+  background:transparent;
+  border:0;
+  padding:0;
+  cursor:pointer;
+  font-family:"Parisienne", cursive;
+  font-size:30px;
+  color:rgba(255,255,255,.95);
+  text-align:left;
+}
+
+/* =========================
+   PÁGINAS VACÍAS
+========================= */
+.blankPage{
+  padding:24px 18px;
+  font-size:32px;
+  color:var(--text-main);
+}
