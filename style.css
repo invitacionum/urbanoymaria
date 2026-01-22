@@ -1,29 +1,34 @@
-/* RESET */
+/* =========================
+   RESET + VARIABLES
+========================= */
 *{ margin:0; padding:0; box-sizing:border-box; }
 
 :root{
   --text-main: rgba(0,0,0,.72);
+  --text-soft: rgba(0,0,0,.55);
   --overlay: rgba(0,0,0,.35);
 }
 
 html, body{
   height:100%;
   width:100%;
-  overflow:hidden; /* sin scroll */
+  overflow:hidden; /* SIN SCROLL */
 }
 
 body{
   background:#fff;
   font-family:"Parisienne", cursive;
+  color:var(--text-soft);
 }
 
-/* INTRO (SOBRE) */
+/* =========================
+   INTRO (SOBRE)
+========================= */
 .intro{
   position:fixed;
   inset:0;
   background:#000;
   z-index:9999;
-  opacity:1;
   transition:opacity 520ms ease;
 }
 .intro.fadeOut{
@@ -35,89 +40,101 @@ body{
   height:100vh;
   object-fit:cover;
   display:block;
-  background:#000;
 }
 
-/* APP */
+/* =========================
+   APP + TOPBAR
+========================= */
 .app{ display:none; height:100%; }
 .app.show{ display:block; }
 
-/* TOPBAR */
 .topbar{
   position:fixed;
   top:0; left:0; right:0;
-  height:56px;
+  height:48px;                 /* 🔽 MÁS BAJO */
   display:flex;
   align-items:center;
-  padding:0 14px;
+  padding:0 12px;
   background:rgba(255,255,255,.95);
   z-index:10;
 }
 
-.iconBtn{
+.iconBtn,
+.replayBtn{
   background:transparent;
   border:0;
-  font-size:22px;
+  font-size:20px;
   cursor:pointer;
   color:var(--text-main);
 }
 
 .logoText{
-  font-size:20px;
-  margin-left:8px;
+  font-size:18px;
+  margin-left:6px;
   color:var(--text-main);
 }
 
 .replayBtn{
   margin-left:auto;
-  background:transparent;
-  border:0;
-  font-size:20px;
-  cursor:pointer;
-  color:var(--text-main);
-  opacity:.75;
+  opacity:.7;
 }
-.replayBtn:hover{ opacity:1; }
 
-/* PAGES */
+/* =========================
+   PAGES
+========================= */
 .pages{
-  padding-top:56px;
+  padding-top:48px;            /* 🔽 acorde al topbar */
   height:100%;
 }
 
 .page{
   display:none;
-  height:calc(100dvh - 56px);
-  height:calc(100svh - 56px);
+  height:calc(100vh - 48px);
+  height:calc(100svh - 48px);
   overflow:hidden;
   background:#fff;
 
   opacity:0;
-  transform:translateY(4px);
-  transition:opacity 220ms ease, transform 220ms ease;
+  transform:translateY(2px);
+  transition:opacity 200ms ease, transform 200ms ease;
 }
 .page.is-active{ display:block; }
-.page.is-visible{ opacity:1; transform:translateY(0); }
+.page.is-visible{ opacity:1; transform:none; }
 
-/* PORTADA FULLSCREEN (1 imagen) */
-.coverWrap{
+/* =========================
+   INICIO – PORTADA COMPLETA
+========================= */
+.homeFit{
   height:100%;
   width:100%;
+
+  /* 🔥 AQUÍ ESTABA EL PROBLEMA */
+  max-width:100%;              /* ❌ fuera límites artificiales */
+  padding:4px 6px 6px;         /* 🔥 casi sin aire */
+
+  display:flex;
+  flex-direction:column;
+}
+
+/* Imagen ocupa TODO el espacio posible */
+.invImageWrap{
+  flex:1;
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0;        /* cero aire */
-  margin:0;
 }
 
-.coverImg{
+/* Imagen SIEMPRE COMPLETA, sin recorte */
+.invImage{
   width:100%;
   height:100%;
-  object-fit:contain; /* respeta la invitación sin recortar */
+  object-fit:contain;
   display:block;
 }
 
-/* MENÚ OVERLAY */
+/* =========================
+   MENÚ OVERLAY
+========================= */
 .menuOverlay{
   position:fixed;
   inset:0;
@@ -133,39 +150,30 @@ body{
   position:absolute;
   top:10px;
   left:10px;
-  width:44px;
-  height:44px;
+  width:40px;
+  height:40px;
   background:transparent;
   border:0;
-  font-size:22px;
+  font-size:20px;
   color:#fff;
   cursor:pointer;
 }
 
 .menuNav{
   position:absolute;
-  top:70px;
-  left:22px;
+  top:64px;
+  left:20px;
   display:flex;
   flex-direction:column;
-  gap:14px;
+  gap:12px;
 }
 
 .menuLink{
   background:transparent;
   border:0;
-  padding:0;
   cursor:pointer;
   font-family:"Parisienne", cursive;
-  font-size:30px;
-  color:rgba(255,255,255,.95);
+  font-size:28px;
+  color:#fff;
   text-align:left;
 }
-
-/* PÁGINAS VACÍAS */
-.blankPage{
-  padding:24px 18px;
-  font-size:32px;
-  color:var(--text-main);
-}
-
