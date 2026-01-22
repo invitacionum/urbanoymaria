@@ -29,6 +29,7 @@ body{
   inset:0;
   background:#000;
   z-index:9999;
+  opacity:1;
   transition:opacity 520ms ease;
 }
 .intro.fadeOut{
@@ -40,6 +41,7 @@ body{
   height:100vh;
   object-fit:cover;
   display:block;
+  background:#000;
 }
 
 /* =========================
@@ -51,83 +53,90 @@ body{
 .topbar{
   position:fixed;
   top:0; left:0; right:0;
-  height:48px;                 /* 🔽 MÁS BAJO */
+  height:56px;
   display:flex;
   align-items:center;
-  padding:0 12px;
+  padding:0 14px;
   background:rgba(255,255,255,.95);
   z-index:10;
+  border-bottom:none;
+  box-shadow:none;
 }
 
-.iconBtn,
-.replayBtn{
+.iconBtn{
   background:transparent;
   border:0;
-  font-size:20px;
+  font-size:22px;
   cursor:pointer;
   color:var(--text-main);
 }
 
 .logoText{
   font-size:18px;
-  margin-left:6px;
+  margin-left:8px;
   color:var(--text-main);
+  opacity:.9;
 }
 
 .replayBtn{
   margin-left:auto;
-  opacity:.7;
+  background:transparent;
+  border:0;
+  font-size:18px;
+  cursor:pointer;
+  color:var(--text-main);
+  opacity:.65;
 }
+.replayBtn:hover{ opacity:1; }
 
 /* =========================
    PAGES
 ========================= */
 .pages{
-  padding-top:48px;            /* 🔽 acorde al topbar */
+  padding-top:56px;
   height:100%;
 }
 
 .page{
   display:none;
-  height:calc(100vh - 48px);
-  height:calc(100svh - 48px);
-  overflow:hidden;
+  height:calc(100vh - 56px);
+  height:calc(100svh - 56px);
+  overflow:hidden; /* sin scroll */
   background:#fff;
 
   opacity:0;
-  transform:translateY(2px);
-  transition:opacity 200ms ease, transform 200ms ease;
+  transform:translateY(4px);
+  transition:opacity 220ms ease, transform 220ms ease;
 }
 .page.is-active{ display:block; }
-.page.is-visible{ opacity:1; transform:none; }
+.page.is-visible{ opacity:1; transform:translateY(0); }
 
 /* =========================
-   INICIO – PORTADA COMPLETA
+   INICIO – PORTADA COMPLETA (SIN RECORTAR)
 ========================= */
 .homeFit{
   height:100%;
-  width:100%;
-
-  /* 🔥 AQUÍ ESTABA EL PROBLEMA */
-  max-width:100%;              /* ❌ fuera límites artificiales */
-  padding:4px 6px 6px;         /* 🔥 casi sin aire */
-
+  max-width:720px;      /* mantiene estética “invitación” */
+  margin:0 auto;
+  padding:2px 6px 4px;  /* ✅ menos aire (arriba/lados/abajo) */
   display:flex;
   flex-direction:column;
 }
 
-/* Imagen ocupa TODO el espacio posible */
 .invImageWrap{
-  flex:1;
+  height:100%;
+  width:100%;
   display:flex;
   align-items:center;
   justify-content:center;
 }
 
-/* Imagen SIEMPRE COMPLETA, sin recorte */
+/* ✅ clave: escala completa sin deformar ni “desaparecer” */
 .invImage{
-  width:100%;
-  height:100%;
+  max-width:100%;
+  max-height:100%;
+  width:auto;
+  height:auto;
   object-fit:contain;
   display:block;
 }
@@ -150,30 +159,40 @@ body{
   position:absolute;
   top:10px;
   left:10px;
-  width:40px;
-  height:40px;
+  width:44px;
+  height:44px;
   background:transparent;
   border:0;
-  font-size:20px;
+  font-size:22px;
   color:#fff;
   cursor:pointer;
 }
 
 .menuNav{
   position:absolute;
-  top:64px;
-  left:20px;
+  top:70px;
+  left:22px;
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:14px;
 }
 
 .menuLink{
   background:transparent;
   border:0;
+  padding:0;
   cursor:pointer;
   font-family:"Parisienne", cursive;
-  font-size:28px;
-  color:#fff;
+  font-size:30px;
+  color:rgba(255,255,255,.95);
   text-align:left;
+}
+
+/* =========================
+   PÁGINAS VACÍAS
+========================= */
+.blankPage{
+  padding:24px 18px;
+  font-size:32px;
+  color:var(--text-main);
 }
