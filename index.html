@@ -26,8 +26,6 @@
     <header class="topbar">
       <button id="menuBtn" class="iconBtn" aria-label="Menú">☰</button>
       <div class="logoText">U&amp;M</div>
-
-      <!-- Volver a ver el sobre -->
       <button id="replayBtn" class="replayBtn" aria-label="Ver el sobre otra vez">↻</button>
     </header>
 
@@ -48,28 +46,10 @@
 
     <main class="pages">
 
-      <!-- INICIO: PORTADA = IMAGEN COMPLETA + TEXTO ABAJO -->
+      <!-- INICIO: PORTADA = 1 IMAGEN A PANTALLA COMPLETA -->
       <section class="page is-active is-visible" data-page="inicio">
-        <div class="homeFit">
-
-          <div class="invImageWrap invBlock">
-            <img class="invImage" src="assets/Invitacion.png" alt="Invitación" />
-          </div>
-              
-          <div class="invImageWrap sanBlock">
-            <img class="sanImage" src="assets/SanLorenzo.png" alt="San Lorenzo" />
-          </div>
-
-          <div class="bottomText">
-            <p class="confirm">Se ruega Confirmación</p>
-
-            <div class="footer">
-              <div class="left">Urbano<br>668 556 740</div>
-              <div class="center">Sevilla, 2026</div>
-              <div class="right">María<br>662 393 762</div>
-            </div>
-          </div>
-
+        <div class="coverWrap">
+          <img class="coverImg" src="assets/Invitacion.png" alt="Invitación" />
         </div>
       </section>
 
@@ -84,101 +64,7 @@
     </main>
   </div>
 
-  <script>
-    // ========= INTRO SOBRE =========
-    const intro = document.getElementById("intro");
-    const introVideo = document.getElementById("introVideo");
-    const app = document.getElementById("app");
-
-    let started = false;
-
-    function showApp(){
-      intro.style.display = "none";
-      intro.classList.remove("fadeOut");
-      app.classList.add("show");
-      app.setAttribute("aria-hidden", "false");
-      window.scrollTo(0,0);
-    }
-
-    function showIntro(){
-      // vuelve a enseñar el sobre y reinicia el vídeo
-      app.classList.remove("show");
-      app.setAttribute("aria-hidden", "true");
-      intro.style.display = "block";
-      intro.classList.remove("fadeOut");
-      started = false;
-      try{
-        introVideo.pause();
-        introVideo.currentTime = 0;
-      }catch(e){}
-    }
-
-    // Click en la intro -> reproduce una vez
-    intro.addEventListener("click", async () => {
-      if (started) return;
-      started = true;
-      try {
-        introVideo.currentTime = 0;
-        await introVideo.play();
-      } catch (e) {
-        showApp();
-      }
-    });
-
-    // Al terminar el vídeo -> muestra la portada
-    introVideo.addEventListener("ended", () => {
-      intro.classList.add("fadeOut");
-      setTimeout(showApp, 520);
-    });
-
-    // ========= MENÚ =========
-    const menuBtn = document.getElementById("menuBtn");
-    const closeBtn = document.getElementById("closeBtn");
-    const menuOverlay = document.getElementById("menuOverlay");
-
-    menuBtn.addEventListener("click", () => menuOverlay.classList.add("show"));
-    closeBtn.addEventListener("click", () => menuOverlay.classList.remove("show"));
-    menuOverlay.addEventListener("click", (e) => {
-      if (e.target === menuOverlay) menuOverlay.classList.remove("show");
-    });
-
-    // ========= PÁGINAS =========
-    const pages = Array.from(document.querySelectorAll(".page"));
-    let active = "inicio";
-
-    function getPage(name){ return pages.find(p => p.dataset.page === name); }
-
-    function setActive(target){
-      if (!target || target === active) return;
-      const current = getPage(active);
-      const next = getPage(target);
-      if (!current || !next) return;
-
-      current.classList.remove("is-visible");
-      setTimeout(() => {
-        current.classList.remove("is-active");
-        next.classList.add("is-active");
-        requestAnimationFrame(() => next.classList.add("is-visible"));
-        active = target;
-        window.scrollTo(0,0);
-      }, 220);
-    }
-
-    document.querySelectorAll(".menuLink").forEach(btn => {
-      btn.addEventListener("click", () => {
-        menuOverlay.classList.remove("show");
-        setActive(btn.dataset.page);
-      });
-    });
-
-    // ========= REPLAY (sin recargar) =========
-    const replayBtn = document.getElementById("replayBtn");
-    replayBtn.addEventListener("click", () => {
-      menuOverlay.classList.remove("show");
-      showIntro();
-    });
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
 

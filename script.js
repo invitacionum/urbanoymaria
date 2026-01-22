@@ -1,91 +1,94 @@
+// ========= INTRO SOBRE =========
 const intro = document.getElementById("intro");
-const video = document.getElementById("introVideo");
+const introVideo = document.getElementById("introVideo");
 const app = document.getElementById("app");
 
-const menuBtn = document.getElementById("menuBtn");
-const closeBtn = document.getElementById("closeBtn");
-const menuOverlay = document.getElementById("menuOverlay");
-
-const pages = Array.from(document.querySelectorAll(".page"));
-
 let started = false;
-let active = "inicio";
 
-/* Intro -> play una vez */
+function showApp(){
+  intro.style.display = "none";
+  intro.classList.remove("fadeOut");
+  app.classList.add("show");
+  app.setAttribute("aria-hidden", "false");
+  window.scrollTo(0,0);
+}
+
+function showIntro(){
+  app.classList.remove("show");
+  app.setAttribute("aria-hidden", "true");
+  intro.style.display = "block";
+  intro.classList.remove("fadeOut");
+  started = false;
+  try{
+    introVideo.pause();
+    introVideo.currentTime = 0;
+  }catch(e){}
+}
+
+// Click en la intro -> reproduce una vez
 intro.addEventListener("click", async () => {
   if (started) return;
   started = true;
-
   try {
-    video.currentTime = 0;
-    await video.play();
+    introVideo.currentTime = 0;
+    await introVideo.play();
   } catch (e) {
     showApp();
   }
 });
 
-video.addEventListener("ended", () => {
+// Al terminar el vídeo -> muestra la portada
+introVideo.addEventListener("ended", () => {
   intro.classList.add("fadeOut");
-  setTimeout(showApp, 620);
+  setTimeout(showApp, 520);
 });
 
-function showApp(){
-  intro.style.display = "none";
-  app.classList.add("show");
-  app.setAttribute("aria-hidden", "false");
-  // asegura animación inicial
-  const first = getPage("inicio");
-  first.classList.add("is-active");
-  requestAnimationFrame(() => first.classList.add("is-visible"));
-}
+// ========= MENÚ =========
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+const menuOverlay = document.getElementById("menuOverlay");
 
-/* Menú open/close */
-menuBtn.addEventListener("click", () => {
-  menuOverlay.classList.add("show");
-  menuOverlay.setAttribute("aria-hidden", "false");
-});
-
-function closeMenu(){
-  menuOverlay.classList.remove("show");
-  menuOverlay.setAttribute("aria-hidden", "true");
-}
-
-closeBtn.addEventListener("click", closeMenu);
+menuBtn.addEventListener("click", () => menuOverlay.classList.add("show"));
+closeBtn.addEventListener("click", () => menuOverlay.classList.remove("show"));
 menuOverlay.addEventListener("click", (e) => {
-  if (e.target === menuOverlay) closeMenu();
+  if (e.target === menuOverlay) menuOverlay.classList.remove("show");
 });
 
-/* Navegación a “sección nueva” (página nueva) */
-document.querySelectorAll(".menuLink").forEach(btn => {
-  btn.addEventListener("click", () => {
-    const target = btn.dataset.page;
-    closeMenu();
-    setActive(target);
-  });
-});
+// ========= PÁGINAS =========
+const pages = Array.from(document.querySelectorAll(".page"));
+let active = "inicio";
 
-function getPage(name){
-  return pages.find(p => p.dataset.page === name);
-}
+function getPage(name){ return pages.find(p => p.dataset.page === name); }
 
 function setActive(target){
   if (!target || target === active) return;
-
   const current = getPage(active);
   const next = getPage(target);
+  if (!current || !next) return;
 
-  // fade out actual
   current.classList.remove("is-visible");
-
   setTimeout(() => {
     current.classList.remove("is-active");
-
     next.classList.add("is-active");
     requestAnimationFrame(() => next.classList.add("is-visible"));
-
     active = target;
-    window.scrollTo(0, 0);
-  }, 430);
+    window.scrollTo(0,0);
+  }, 220);
 }
+
+document.querySelectorAll(".menuLink").forEach(btn => {
+  btn.addEventListener("click", () => {
+    menuOverlay.classList.remove("show");
+    setActive(btn.dataset.page);
+  });
+});
+
+// ========= REPLAY (volver a ver el sobre) =========
+const replayBtn = document.getElementById("replayBtn");
+replayBtn.addEventListener("click", () => {
+  menuOverlay.classList.remove("show");
+  showIntro();
+});
+
 
 
