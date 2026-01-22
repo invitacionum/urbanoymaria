@@ -214,6 +214,49 @@ body{
   text-align:left;
 }
 
+/* ===== AJUSTES FINOS HOME (PEGAR AL FINAL) ===== */
+
+/* 1) Quitar la línea fea bajo el topbar */
+.topbar{
+    border-bottom: none !important;
+    box-shadow: none !important;
+  }
+  
+  /* 2) Bajar un poco el bloque del nombre (más aire arriba) */
+  .invitationFit{
+    padding-top: 18px !important;   /* antes 10px */
+    justify-content: flex-start !important;
+  }
+  
+  /* 3) Reducir los huecos enormes entre texto ↔ imagen ↔ confirmación */
+  .fitTop{
+    margin-bottom: 6px !important;
+  }
+  
+  .fitImageWrap{
+    flex: 0 0 auto !important;      /* deja de “comerse” el espacio */
+    padding: 6px 0 !important;
+    margin: 0 !important;
+  }
+  
+  .sanlorenzoFit{
+    width: 92% !important;
+    max-height: 42vh !important;    /* controla el tamaño para que NO genere huecos */
+  }
+  
+  /* 4) Confirmación + footer más pegados a la imagen */
+  .fitBottom{
+    margin-top: 6px !important;
+  }
+  
+  .confirm{
+    margin: 6px 0 4px !important;
+  }
+  
+  .footer{
+    padding-bottom: 6px !important;
+  }
+  
   
   
   
