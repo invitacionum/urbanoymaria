@@ -1,10 +1,15 @@
 const intro = document.getElementById("intro");
 const video = document.getElementById("introVideo");
-const content = document.getElementById("content");
+
+const app = document.getElementById("app");
+
+const menuBtn = document.getElementById("menuBtn");
+const closeBtn = document.getElementById("closeBtn");
+const menuOverlay = document.getElementById("menuOverlay");
 
 let started = false;
 
-// Tocar el vídeo (o el área) -> reproducir
+/* 1) Tocar intro -> reproducir vídeo (una vez) */
 intro.addEventListener("click", async () => {
   if (started) return;
   started = true;
@@ -13,31 +18,49 @@ intro.addEventListener("click", async () => {
     video.currentTime = 0;
     await video.play();
   } catch (e) {
-    // Si por cualquier motivo falla, saltamos directo a la invitación
-    goToInvitation();
+    // si falla, saltamos directamente
+    showApp();
   }
 });
 
-// Al terminar el vídeo -> fade suave -> mostrar invitación
+/* 2) Al terminar -> fade suave -> mostrar web */
 video.addEventListener("ended", () => {
-  goToInvitation();
+  intro.classList.add("fadeOut");
+  setTimeout(showApp, 620);
 });
 
-function goToInvitation(){
-  // Fade out del intro
-  intro.classList.add("fadeOut");
-
-  // Cuando termine el fade out, ocultamos intro y mostramos content
-  setTimeout(() => {
-    intro.style.display = "none";
-
-    content.classList.add("show");
-    // Pequeño delay para que el navegador aplique display:flex antes del fadeIn
-    requestAnimationFrame(() => {
-      content.classList.add("fadeIn");
-      content.setAttribute("aria-hidden", "false");
-      window.scrollTo(0, 0);
-    });
-  }, 560);
+function showApp(){
+  intro.style.display = "none";
+  app.classList.add("show");
+  app.setAttribute("aria-hidden", "false");
+  window.scrollTo(0, 0);
 }
+
+/* Menú */
+menuBtn.addEventListener("click", () => {
+  menuOverlay.classList.add("show");
+  menuOverlay.setAttribute("aria-hidden", "false");
+});
+
+closeBtn.addEventListener("click", closeMenu);
+
+/* Cerrar si tocas fuera del panel */
+menuOverlay.addEventListener("click", (e) => {
+  if (e.target === menuOverlay) closeMenu();
+});
+
+/* Al pulsar un item del menú -> cerrar y hacer scroll suave */
+document.querySelectorAll(".menuItem").forEach(a => {
+  a.addEventListener("click", () => {
+    closeMenu();
+  });
+});
+
+function closeMenu(){
+  menuOverlay.classList.remove("show");
+  menuOverlay.setAttribute("aria-hidden", "true");
+}
+
+/* Scroll suave (parecido a Sites) */
+document.documentElement.style.scrollBehavior = "smooth";
 

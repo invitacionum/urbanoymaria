@@ -8,7 +8,7 @@
 </head>
 <body>
 
-  <!-- INTRO: SOLO MP4 -->
+  <!-- INTRO FULLSCREEN: SOLO MP4 -->
   <div id="intro" class="intro" aria-label="Invitación">
     <video
       id="introVideo"
@@ -19,23 +19,96 @@
     </video>
   </div>
 
-  <!-- INVITACIÓN -->
-  <main id="content" class="content" aria-hidden="true">
-    <img
-      class="inviteImg"
-      src="assets/Invitacion.png"
-      alt="Invitación de boda de Urbano y María"
-    />
+  <!-- APP (oculta hasta que termine el vídeo) -->
+  <div id="app" class="app" aria-hidden="true">
 
-    <!-- Si NO quieres mostrar SanLorenzo aparte, borra esta línea -->
-    <img
-      class="extraImg"
-      src="assets/SanLorenzo.png"
-      alt="San Lorenzo, Sevilla"
-    />
-  </main>
+    <!-- HEADER tipo Google Sites -->
+    <header class="topbar">
+      <button id="menuBtn" class="iconBtn" aria-label="Abrir menú">
+        <!-- icono hamburguesa -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 6h16M4 12h16M4 18h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <!-- Logo U&M (ahora texto). Si luego lo quieres como imagen:
+           sustituye por: <img class="logoImg" src="assets/UyM.png" alt="U&M" />
+      -->
+      <div class="logoText">U&amp;M</div>
+
+      <button class="iconBtn" aria-label="Buscar" style="opacity:.0; pointer-events:none;">
+        <!-- dejamos hueco para que quede equilibrado (como en Sites) -->
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M10.5 3a7.5 7.5 0 105.3 12.8l3.2 3.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- MENÚ (overlay) -->
+    <div id="menuOverlay" class="menuOverlay" aria-hidden="true">
+      <div class="menuPanel" role="dialog" aria-label="Menú">
+        <button id="closeBtn" class="closeBtn" aria-label="Cerrar menú">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <nav class="menuNav">
+          <a href="#inicio" class="menuItem">Inicio</a>
+          <a href="#asistencia" class="menuItem">Asistencia</a>
+          <a href="#ceremonia" class="menuItem">Ceremonia</a>
+          <a href="#banquete" class="menuItem">Banquete</a>
+          <a href="#autobus" class="menuItem">Autobús</a>
+          <a href="#itinerario" class="menuItem">Itinerario</a>
+          <a href="#agradecimiento" class="menuItem">Agradecimiento</a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <main class="content">
+      <!-- INICIO -->
+      <section id="inicio" class="section">
+        <!-- Tu invitación completa -->
+        <img class="inviteImg" src="assets/Invitacion.png" alt="Invitación" />
+      </section>
+
+      <!-- Secciones (placeholder por ahora, luego metemos contenido real) -->
+      <section id="asistencia" class="section textSection">
+        <h2>Asistencia</h2>
+        <p>Aquí irá el enlace o formulario de confirmación.</p>
+      </section>
+
+      <section id="ceremonia" class="section textSection">
+        <h2>Ceremonia</h2>
+        <p>Detalles de la parroquia, hora, mapa, etc.</p>
+      </section>
+
+      <section id="banquete" class="section textSection">
+        <h2>Banquete</h2>
+        <p>Detalles de Hacienda los Parrales, hora, mapa, etc.</p>
+      </section>
+
+      <section id="autobus" class="section textSection">
+        <h2>Autobús</h2>
+        <p>Info de buses, horarios y puntos de salida.</p>
+      </section>
+
+      <section id="itinerario" class="section textSection">
+        <h2>Itinerario</h2>
+        <p>Timeline del día (ceremonia, cóctel, cena, fiesta...).</p>
+      </section>
+
+      <section id="agradecimiento" class="section textSection">
+        <h2>Agradecimiento</h2>
+        <p>Texto final bonito, contacto, etc.</p>
+      </section>
+    </main>
+
+  </div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
