@@ -90,3 +90,18 @@ replayBtn.addEventListener("click", () => {
   showIntro();
 });
 
+  // ===== INVITACIÓN FULLSCREEN =====
+  const openInv = document.getElementById("openInvFull");
+  const invFull = document.getElementById("invFull");
+
+  if (openInv && invFull) {
+    openInv.addEventListener("click", () => {
+      invFull.classList.add("show");
+      invFull.setAttribute("aria-hidden", "false");
+    });
+
+    invFull.addEventListener("click", () => {
+      invFull.classList.remove("show");
+      invFull.setAttribute("aria-hidden", "true");
+    });
+  }

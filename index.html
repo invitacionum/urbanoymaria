@@ -53,7 +53,8 @@
       <section class="page is-active is-visible" data-page="inicio">
         <div class="homeFit">
           <div class="invImageWrap">
-            <img class="invImage" src="assets/Invitacion.png" alt="Invitación" />
+            <!-- ✅ ÚNICO CAMBIO AQUÍ: id="openInvFull" -->
+            <img id="openInvFull" class="invImage" src="assets/Invitacion.png" alt="Invitación" />
           </div>
         </div>
       </section>
@@ -200,13 +201,10 @@
       </section>
 
       <!-- ITINERARIO -->
-<!-- ITINERARIO -->
       <section class="page" data-page="itinerario">
         <div class="homeFit">
           <div class="invImageWrap">
-            <img
-              class="invImage"
-              src="assets/Itinerario.png">
+            <img class="invImage" src="assets/Itinerario.png" alt="Itinerario" />
           </div>
         </div>
       </section>
@@ -231,6 +229,15 @@
       </section>
 
     </main>
+  </div>
+
+  <!-- ✅ NUEVO: OVERLAY FULLSCREEN (NO TOCA NADA MÁS) -->
+  <div id="invFull" class="invFull" aria-hidden="true">
+    <img
+      src="assets/Invitacionhorizontal.png"
+      alt="Invitación horizontal"
+      class="invFullImg"
+    >
   </div>
 
   <script>
@@ -323,6 +330,22 @@
       menuOverlay.classList.remove("show");
       showIntro();
     });
+
+    // ✅ NUEVO: INVITACIÓN FULLSCREEN (clic abre / clic cierra)
+    const openInv = document.getElementById("openInvFull");
+    const invFull = document.getElementById("invFull");
+
+    if (openInv && invFull) {
+      openInv.addEventListener("click", () => {
+        invFull.classList.add("show");
+        invFull.setAttribute("aria-hidden", "false");
+      });
+
+      invFull.addEventListener("click", () => {
+        invFull.classList.remove("show");
+        invFull.setAttribute("aria-hidden", "true");
+      });
+    }
   </script>
 
 </body>
