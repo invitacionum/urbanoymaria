@@ -603,3 +603,367 @@ body{
   .tlText{ font-size: 24px; }
   .tlIcon{ width: 40px; height: 40px; font-size: 20px; }
 }
+
+/* =========================
+   ITINERARIO (igual a la imagen)
+   3 columnas: icono | línea+punto | texto
+========================= */
+
+.itWrap{
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 24px 18px 30px;
+  text-align: center;
+}
+
+.itTitle{
+  font-size: clamp(34px, 7vw, 54px);
+  color: rgba(0,0,0,.65);
+  font-weight: 400;
+  margin: 6px 0 4px;
+}
+
+.itDivider{
+  font-size: 28px;
+  line-height: 1;
+  margin: 6px 0 18px;
+  color: rgba(0,0,0,.22);
+}
+
+.timeline{
+  position: relative;
+  width: min(420px, 92%);
+  margin: 0 auto;
+  padding: 6px 0;
+}
+
+/* línea vertical (columna del medio) */
+.timeline::before{
+  content:"";
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: 74px;               /* icon (56) + gap (18) aprox */
+  width: 2px;
+  background: rgba(0,0,0,.15);
+  border-radius: 999px;
+}
+
+/* cada fila */
+.tlItem{
+  position: relative;
+  display: grid;
+  grid-template-columns: 56px 36px 1fr; /* icono | columna línea | texto */
+  align-items: center;
+  padding: 14px 0;
+}
+
+/* icono (como en la imagen: sin círculo) */
+.tlIcon{
+  grid-column: 1;
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background: transparent;     /* 👈 fuera el círculo */
+  border-radius: 0;
+  font-size: 26px;
+
+  /* Si mantienes emojis, saldrán a color. (Abajo te digo cómo ponerlos en gris) */
+}
+
+/* punto sobre la línea */
+.tlDot{
+  grid-column: 2;
+  justify-self: center;
+  width: 10px;
+  height: 10px;
+  background: rgba(0,0,0,.35);
+  border-radius: 999px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 6px rgba(0,0,0,.06);
+}
+
+/* contenido a la derecha */
+.tlContent{
+  grid-column: 3;
+  text-align: left;
+  margin: 0;
+}
+
+.tlTime{
+  font-size: 22px;
+  color: rgba(0,0,0,.50);
+  line-height: 1.05;
+}
+
+.tlText{
+  font-size: 26px;
+  color: rgba(0,0,0,.70);
+  line-height: 1.05;
+  margin-top: 3px;
+}
+
+/* quita la animación si quieres look “papel” */
+.tlItem{
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* móvil pequeño */
+@media (max-width: 380px){
+  .timeline::before{ left: 70px; }
+  .tlTime{ font-size: 20px; }
+  .tlText{ font-size: 24px; }
+  .tlItem{ grid-template-columns: 52px 34px 1fr; }
+}
+
+/* ====== FIX CENTRADO ITINERARIO (como tu imagen 2) ====== */
+
+/* 1) La timeline ahora es un bloque “cerrado” y centrado */
+.timeline{
+  /* ancho total del bloque (icono + línea + texto) */
+  width: min(360px, 92vw);
+  margin: 0 auto;            /* 👈 centra */
+  padding: 6px 0;
+  position: relative;
+}
+
+/* 2) Rejilla consistente: icono | línea | texto */
+.tlItem{
+  display: grid;
+  grid-template-columns: 74px 28px 1fr;  /* 👈 iconos más cerca y bloque más compacto */
+  align-items: center;
+  padding: 14px 0;
+  position: relative;
+}
+
+/* 3) Línea vertical EXACTA en el centro de la columna 2 */
+.timeline::before{
+  content:"";
+  position:absolute;
+  top: 0;
+  bottom: 0;
+
+  /* 74px (columna icono) + 14px (mitad de la col 2 de 28px) */
+  left: calc(74px + 14px);
+
+  width: 2px;
+  background: rgba(0,0,0,.15);
+  border-radius: 999px;
+}
+
+/* 4) Punto centrado en la columna 2 (encima de la línea) */
+.tlDot{
+  grid-column: 2;
+  justify-self: center;
+  width: 10px;
+  height: 10px;
+  background: rgba(0,0,0,.35);
+  border-radius: 999px;
+  z-index: 2;
+  box-shadow: 0 0 0 6px rgba(0,0,0,.06);
+}
+
+/* 5) Iconos centrados en su columna */
+.tlIcon{
+  grid-column: 1;
+  justify-self: center;
+  width: 44px;
+  height: 44px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: transparent;
+  font-size: 26px;
+}
+
+/* 6) Texto alineado a la izquierda como en la imagen */
+.tlContent{
+  grid-column: 3;
+  text-align: left;
+}
+
+.tlTime{
+  font-size: 22px;
+  color: rgba(0,0,0,.50);
+  line-height: 1.05;
+}
+
+.tlText{
+  font-size: 26px;
+  color: rgba(0,0,0,.70);
+  line-height: 1.05;
+  margin-top: 3px;
+}
+
+/* móvil pequeño */
+@media (max-width: 380px){
+  .timeline{ width: min(330px, 92vw); }
+  .tlItem{ grid-template-columns: 66px 26px 1fr; }
+  .timeline::before{ left: calc(66px + 13px); } /* 26/2 = 13 */
+  .tlTime{ font-size: 20px; }
+  .tlText{ font-size: 24px; }
+}
+
+/* ===== ITINERARIO: centrado real + puntos finos (como imagen 2) ===== */
+
+/* centra el bloque completo */
+.timeline{
+  width: min(420px, 92vw);
+  margin: 0 auto;              /* 👈 centra */
+  padding: 8px 0;
+  position: relative;
+}
+
+/* layout compacto: icono | línea | texto */
+.tlItem{
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px 34px 1fr; /* 👈 más ancho el bloque para que “caiga” al centro */
+  align-items: center;
+  padding: 14px 0;
+}
+
+/* línea vertical en el centro de la col 2 */
+.timeline::before{
+  content:"";
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(92px + 17px);     /* 92 + (34/2) */
+  width: 2px;
+  background: rgba(0,0,0,.18);
+  border-radius: 999px;
+}
+
+/* DOT: pequeño y elegante, SIN HALO */
+.tlDot{
+  grid-column: 2;
+  justify-self: center;
+  width: 6px;                  /* 👈 pequeño */
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(0,0,0,.35);
+  box-shadow: none;            /* 👈 fuera el halo feo */
+  z-index: 2;
+}
+
+/* iconos */
+.tlIcon{
+  grid-column: 1;
+  justify-self: center;
+  width: 48px;
+  height: 48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: transparent;
+  font-size: 26px;
+  opacity: .6;                 /* más “invitación” */
+}
+
+/* texto */
+.tlContent{
+  grid-column: 3;
+  text-align: left;
+}
+
+.tlTime{
+  font-size: 22px;
+  color: rgba(0,0,0,.52);
+  line-height: 1.05;
+}
+
+.tlText{
+  font-size: 26px;
+  color: rgba(0,0,0,.70);
+  line-height: 1.05;
+  margin-top: 3px;
+}
+
+/* móvil */
+@media (max-width: 380px){
+  .timeline{ width: min(380px, 92vw); }
+  .tlItem{ grid-template-columns: 84px 32px 1fr; }
+  .timeline::before{ left: calc(84px + 16px); }
+}
+
+.tlDot{ display:none; }
+
+/* ===== ITINERARIO – AJUSTE FINAL (centrado real como imagen buena) ===== */
+
+.timeline{
+  width: min(420px, 92vw);
+  margin: 0 auto;
+  padding: 8px 0;
+  position: relative;
+}
+
+/* ICONO | LÍNEA | TEXTO  (iconos MÁS CERCA de la línea) */
+.tlItem{
+  display: grid;
+  grid-template-columns: 56px 22px 1fr; /* 👈 CLAVE */
+  align-items: center;
+  padding: 14px 0;
+}
+
+/* línea vertical */
+.timeline::before{
+  content:"";
+  position:absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(56px + 11px);   /* 56 + (22 / 2) */
+  width: 2px;
+  background: rgba(0,0,0,.18);
+  border-radius: 999px;
+}
+
+/* quitamos los puntos (como tu imagen buena) */
+.tlDot{
+  display: none;
+}
+
+/* iconos: pequeños, pegados a la línea */
+.tlIcon{
+  grid-column: 1;
+  justify-self: end;        /* 👈 los acerca a la línea */
+  width: 32px;
+  height: 32px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size: 22px;
+  opacity: .55;
+}
+
+/* texto */
+.tlContent{
+  grid-column: 3;
+  text-align: left;
+}
+
+.tlTime{
+  font-size: 22px;
+  color: rgba(0,0,0,.55);
+  line-height: 1.05;
+}
+
+.tlText{
+  font-size: 26px;
+  color: rgba(0,0,0,.70);
+  line-height: 1.05;
+  margin-top: 3px;
+}
+
+/* móvil */
+@media (max-width: 380px){
+  .tlItem{ grid-template-columns: 52px 20px 1fr; }
+  .timeline::before{ left: calc(52px + 10px); }
+}
