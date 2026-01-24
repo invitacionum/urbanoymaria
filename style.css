@@ -742,3 +742,11 @@ body{
 #invFullImg:focus{
   outline: none;
 }
+
+.page[data-page="itinerario"] .invImageWrap{
+  max-width: 600px;        /* antes 520px → más grande */
+}
+
+.page[data-page="itinerario"] .invImage{
+  transform: scale(1.08); /* ligero zoom elegante */
+}
