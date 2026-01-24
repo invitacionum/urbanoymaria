@@ -720,3 +720,25 @@ body{
   outline: none;
 }
 
+/* =========================
+   QUITAR AZUL EN INVITACIÓN FULLSCREEN
+========================= */
+
+/* el overlay completo */
+#invFull{
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* la imagen horizontal */
+#invFullImg{
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  touch-action: manipulation;
+}
+
+#invFullImg:focus{
+  outline: none;
+}
