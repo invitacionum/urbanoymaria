@@ -781,3 +781,98 @@ body{
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
 }
+
+/* =========================
+   BOTÓN SORPRESA (TOPBAR)
+========================= */
+.giftBtn{
+  margin-left:auto;
+  background:transparent;
+  border:0;
+  font-size:20px;
+  cursor:pointer;
+  color:var(--text-main);
+  opacity:.7;
+  padding: 8px 10px;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+}
+.giftBtn:hover{ opacity:1; }
+
+/* Para que ↻ siga a la derecha */
+.replayBtn{
+  margin-left: 6px; /* pequeño aire */
+}
+
+/* =========================
+   OVERLAY SORPRESA
+========================= */
+.giftOverlay{
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: none;
+
+  background: rgba(255,255,255,.35);  /* transparente (no negro) */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  opacity: 0;
+  transition: opacity 220ms ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.giftOverlay.show{
+  display: block;
+  opacity: 1;
+}
+
+/* Tarjeta */
+.giftCard{
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%, -50%);
+
+  width: min(420px, 86vw);
+  padding: 18px 18px 14px;
+
+  border-radius: 18px;
+  background: rgba(255,255,255,.78);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,.10);
+
+  text-align: center;
+
+  /* animación suave */
+  animation: giftIn 240ms ease both;
+}
+
+@keyframes giftIn{
+  from{ opacity: 0; transform: translate(-50%, -50%) scale(.98); }
+  to{ opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.giftTitle{
+  font-size: 30px;
+  color: rgba(0,0,0,.70);
+  margin-bottom: 8px;
+}
+
+.giftText{
+  font-size: 22px;
+  line-height: 1.25;
+  color: rgba(0,0,0,.62);
+}
+
+.giftText b{
+  font-weight: 400;
+  color: rgba(0,0,0,.72);
+}
+
+.giftHint{
+  margin-top: 10px;
+  font-size: 16px;
+  color: rgba(0,0,0,.45);
+}

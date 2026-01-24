@@ -29,6 +29,7 @@
     <header class="topbar">
       <button id="menuBtn" class="iconBtn" aria-label="Menú">☰</button>
       <div class="logoText">U&amp;M</div>
+      <button id="giftBtn" class="giftBtn" aria-label="Sorpresa">🎁</button>      
       <button id="replayBtn" class="replayBtn" aria-label="Ver el sobre otra vez">↻</button>
     </header>
 
@@ -46,6 +47,22 @@
         <button class="menuLink" type="button" data-page="agradecimiento">Agradecimiento</button>
       </nav>
     </div>
+
+    <!-- OVERLAY “SORPRESA” (marcar/enmarcar invitación) -->
+    <div id="giftOverlay" class="giftOverlay" aria-hidden="true">
+      <div class="giftCard" role="dialog" aria-label="Sorpresa">
+        <div class="giftTitle">Una sorpresa 🎁</div>
+
+        <div class="giftText">
+          La invitación física tiene detrás la <b>Plaza de San Lorenzo</b>.
+          <br>
+          Está pensada para que puedas <b>enmarcarla</b> y guardarla de recuerdo.
+        </div>
+
+        <div class="giftHint">Toca para cerrar</div>
+      </div>
+    </div>
+
 
     <main class="pages">
 
