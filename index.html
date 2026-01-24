@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Urbano y María</title>
+
   <link rel="icon" type="image/png" href="assets/logo.png">
   <link rel="apple-touch-icon" href="assets/logo.png">
 
@@ -27,42 +28,27 @@
 
     <!-- TOPBAR -->
     <header class="topbar">
-      <button id="menuBtn" class="iconBtn" aria-label="Menú">☰</button>
+      <button id="menuBtn" class="iconBtn" aria-label="Menú" type="button">☰</button>
       <div class="logoText">U&amp;M</div>
-      <button id="giftBtn" class="giftBtn" aria-label="Sorpresa">🎁</button>      
-      <button id="replayBtn" class="replayBtn" aria-label="Ver el sobre otra vez">↻</button>
+
+      <button id="giftBtn" class="giftBtn" type="button" aria-label="Sorpresa">🎁</button>
+      <button id="replayBtn" class="replayBtn" type="button" aria-label="Ver el sobre otra vez">↻</button>
     </header>
 
     <!-- MENÚ OVERLAY -->
     <div id="menuOverlay" class="menuOverlay" aria-hidden="true">
-      <button id="closeBtn" class="closeBtn" aria-label="Cerrar">✕</button>
+      <button id="closeBtn" class="closeBtn" aria-label="Cerrar" type="button">✕</button>
 
       <nav class="menuNav" aria-label="Navegación">
-        <button class="menuLink" data-page="inicio">Invitación</button>
-        <button class="menuLink" type="button" data-page="asistencia">Asistencia</button>
-        <button class="menuLink" type="button" data-page="ceremonia">Ceremonia</button>
-        <button class="menuLink" type="button" data-page="banquete">Banquete</button>
-        <button class="menuLink" type="button" data-page="autobus">Autobús</button>
-        <button class="menuLink" type="button" data-page="itinerario">Itinerario</button>
-        <button class="menuLink" type="button" data-page="agradecimiento">Agradecimiento</button>
+        <button class="menuLink" data-page="inicio" type="button">Invitación</button>
+        <button class="menuLink" data-page="asistencia" type="button">Asistencia</button>
+        <button class="menuLink" data-page="ceremonia" type="button">Ceremonia</button>
+        <button class="menuLink" data-page="banquete" type="button">Banquete</button>
+        <button class="menuLink" data-page="autobus" type="button">Autobús</button>
+        <button class="menuLink" data-page="itinerario" type="button">Itinerario</button>
+        <button class="menuLink" data-page="agradecimiento" type="button">Agradecimiento</button>
       </nav>
     </div>
-
-    <!-- OVERLAY “SORPRESA” (marcar/enmarcar invitación) -->
-    <div id="giftOverlay" class="giftOverlay" aria-hidden="true">
-      <div class="giftCard" role="dialog" aria-label="Sorpresa">
-        <div class="giftTitle">Una sorpresa 🎁</div>
-
-        <div class="giftText">
-          La invitación física tiene detrás la <b>Plaza de San Lorenzo</b>.
-          <br>
-          Está pensada para que puedas <b>enmarcarla</b> y guardarla de recuerdo.
-        </div>
-
-        <div class="giftHint">Toca para cerrar</div>
-      </div>
-    </div>
-
 
     <main class="pages">
 
@@ -70,23 +56,23 @@
       <section class="page is-active is-visible" data-page="inicio">
         <div class="homeFit">
           <div class="invImageWrap">
-      
+
             <img
               class="invImage"
               src="assets/Invitacion.png"
               alt="Invitación"
               id="openInvFull"
+              draggable="false"
             />
-      
+
             <!-- HINT SOLO EN LA PORTADA -->
             <div class="invHintHome" aria-hidden="true">
               Toca para ampliar la invitación
             </div>
-      
+
           </div>
         </div>
       </section>
-      
 
       <!-- ASISTENCIA (FORM EMBEBIDO) -->
       <section class="page" data-page="asistencia">
@@ -241,32 +227,39 @@
       <!-- AGRADECIMIENTO -->
       <section class="page" data-page="agradecimiento">
         <div class="thanksWrap">
-
-          <p class="thanksText">
-            ¡Para nosotros lo más importante es tu presencia!
-          </p>
-
-          <p class="thanksText">
-            Pero si deseas tener un detalle con nosotros, puedes hacerlo en la siguiente cuenta bancaria
-          </p>
-
-          <p class="thanksIban">
-            ESXX XXXX XXXX XXXX XXXX XXXX
-          </p>
-
+          <p class="thanksText">¡Para nosotros lo más importante es tu presencia!</p>
+          <p class="thanksText">Pero si deseas tener un detalle con nosotros, puedes hacerlo en la siguiente cuenta bancaria</p>
+          <p class="thanksIban">ESXX XXXX XXXX XXXX XXXX XXXX</p>
         </div>
       </section>
 
     </main>
   </div>
 
-  <!-- ✅ NUEVO: OVERLAY FULLSCREEN (NO TOCA NADA MÁS) -->
+  <!-- OVERLAY FULLSCREEN INVITACIÓN -->
   <div id="invFull" class="invFull" aria-hidden="true">
     <img
+      id="invFullImg"
       src="assets/Invitacionhorizontal.png"
       alt="Invitación horizontal"
       class="invFullImg"
+      draggable="false"
     >
+  </div>
+
+  <!-- ✅ OVERLAY SORPRESA -->
+  <div id="giftOverlay" class="giftOverlay" aria-hidden="true">
+    <div class="giftCard" role="dialog" aria-label="Sorpresa">
+      <img class="giftImg" src="assets/MarcoSanLorenzo.png" alt="Ejemplo enmarcado: Plaza de San Lorenzo" />
+
+      <div class="giftText">
+        La invitación física tiene detrás la <b>Plaza de San Lorenzo</b>.
+        <br>
+        Está pensada para que puedas <b>enmarcarla</b> y guardarla de recuerdo.
+      </div>
+
+      <div class="giftHint">Toca para cerrar</div>
+    </div>
   </div>
 
   <script>
@@ -353,26 +346,56 @@
       });
     });
 
-    // ========= REPLAY (volver a ver el sobre) =========
+    // ========= REPLAY =========
     const replayBtn = document.getElementById("replayBtn");
     replayBtn.addEventListener("click", () => {
       menuOverlay.classList.remove("show");
       showIntro();
     });
 
-    // ✅ NUEVO: INVITACIÓN FULLSCREEN (clic abre / clic cierra)
+    // ========= INVITACIÓN FULLSCREEN (PC + MÓVIL) =========
     const openInv = document.getElementById("openInvFull");
     const invFull = document.getElementById("invFull");
 
+    function openFull(e){
+      e.preventDefault();
+      e.stopPropagation();
+      invFull.classList.add("show");
+      invFull.setAttribute("aria-hidden", "false");
+    }
+
+    function closeFull(e){
+      e.preventDefault();
+      e.stopPropagation();
+      invFull.classList.remove("show");
+      invFull.setAttribute("aria-hidden", "true");
+    }
+
     if (openInv && invFull) {
-      openInv.addEventListener("click", () => {
-        invFull.classList.add("show");
-        invFull.setAttribute("aria-hidden", "false");
+      openInv.addEventListener("click", openFull);
+      openInv.addEventListener("touchstart", openFull, { passive: false });
+
+      invFull.addEventListener("click", closeFull);
+      invFull.addEventListener("touchstart", closeFull, { passive: false });
+    }
+
+    // ========= SORPRESA (🎁) =========
+    const giftBtn = document.getElementById("giftBtn");
+    const giftOverlay = document.getElementById("giftOverlay");
+
+    if (giftBtn && giftOverlay) {
+      giftBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        giftOverlay.classList.add("show");
+        giftOverlay.setAttribute("aria-hidden", "false");
       });
 
-      invFull.addEventListener("click", () => {
-        invFull.classList.remove("show");
-        invFull.setAttribute("aria-hidden", "true");
+      giftOverlay.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        giftOverlay.classList.remove("show");
+        giftOverlay.setAttribute("aria-hidden", "true");
       });
     }
   </script>

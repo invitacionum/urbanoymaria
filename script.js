@@ -120,22 +120,22 @@ replayBtn.addEventListener("click", () => {
     invFull.addEventListener("touchstart", closeFull, { passive: false });
   }
 
-  // ========= SORPRESA (caja) =========
-const giftBtn = document.getElementById("giftBtn");
-const giftOverlay = document.getElementById("giftOverlay");
+  // ✅ NUEVO: SORPRESA (🎁) abre/cierra
+  const giftBtn = document.getElementById("giftBtn");
+  const giftOverlay = document.getElementById("giftOverlay");
 
-if (giftBtn && giftOverlay) {
-  giftBtn.addEventListener("click", () => {
-    giftOverlay.classList.add("show");
-    giftOverlay.setAttribute("aria-hidden", "false");
-  });
+  if (giftBtn && giftOverlay) {
+    giftBtn.addEventListener("click", () => {
+      giftOverlay.classList.add("show");
+      giftOverlay.setAttribute("aria-hidden", "false");
+    });
 
-  // tocar cualquier sitio cierra
-  giftOverlay.addEventListener("click", () => {
-    giftOverlay.classList.remove("show");
-    giftOverlay.setAttribute("aria-hidden", "true");
-  });
-}
+    giftOverlay.addEventListener("click", () => {
+      giftOverlay.classList.remove("show");
+      giftOverlay.setAttribute("aria-hidden", "true");
+    });
+  }
+
 
 
   

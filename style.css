@@ -12,7 +12,7 @@
 html, body{
   height:100%;
   width:100%;
-  overflow:hidden; /* SIN SCROLL en la web */
+  overflow:hidden;
 }
 
 body{
@@ -43,15 +43,6 @@ body{
   display:block;
   background:#000;
 }
-.introHint{
-  position:absolute;
-  left:0; right:0;
-  bottom:28px;
-  text-align:center;
-  color:rgba(255,255,255,.85);
-  font-size:18px;
-  letter-spacing:.5px;
-}
 
 /* =========================
    APP + TOPBAR
@@ -76,6 +67,7 @@ body{
   font-size:22px;
   cursor:pointer;
   color:var(--text-main);
+  -webkit-tap-highlight-color: transparent;
 }
 
 .logoText{
@@ -86,13 +78,14 @@ body{
 }
 
 .replayBtn{
-  margin-left:auto;
   background:transparent;
   border:0;
   font-size:20px;
   cursor:pointer;
   color:var(--text-main);
   opacity:.55;
+  padding: 8px 10px;
+  -webkit-tap-highlight-color: transparent;
 }
 .replayBtn:hover{ opacity:1; }
 
@@ -108,7 +101,7 @@ body{
   display:none;
   height:calc(100vh - 56px);
   height:calc(100svh - 56px);
-  overflow:hidden; /* sin scroll */
+  overflow:hidden;
   background:#fff;
 
   opacity:0;
@@ -126,7 +119,7 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:6px;              /* margen mínimo */
+  padding:6px;
 }
 
 .invImageWrap{
@@ -136,27 +129,46 @@ body{
   display:flex;
   align-items:center;
   justify-content:center;
+  position: relative;
 }
 
 .invImage{
   width:100%;
   height:100%;
-  object-fit:contain;       /* NO recorta */
+  object-fit:contain;
   display:block;
+  cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* HINT PORTADA */
+.invHintHome{
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: rgba(0,0,0,.55);
+  opacity: 0;
+  pointer-events: none;
+  animation: invHomeHint 4s ease forwards;
+}
+@keyframes invHomeHint{
+  0%{ opacity:0; transform: translateX(-50%) translateY(8px); }
+  10%{ opacity:1; transform: translateX(-50%) translateY(0); }
+  80%{ opacity:1; }
+  100%{ opacity:0; }
 }
 
 /* =========================
    ASISTENCIA (FORM)
 ========================= */
-.formWrap{
-  height:100%;
-  width:100%;
-}
-.gform{
-  width:100%;
-  height:100%;
-  border:0;
-}
+.formWrap{ height:100%; width:100%; }
+.gform{ width:100%; height:100%; border:0; }
 
 /* =========================
    CEREMONIA / BANQUETE
@@ -171,7 +183,6 @@ body{
   margin:0 auto;
   gap:10px;
 }
-
 .placeMedia{
   flex:1 1 auto;
   min-height:0;
@@ -182,20 +193,14 @@ body{
   align-items:center;
   justify-content:center;
 }
-
 .placeImg{
   width:100%;
   height:100%;
-  object-fit:cover;     /* llena la pantalla */
-  opacity:.7;           /* 70% */
+  object-fit:cover;
+  opacity:.7;
   display:block;
 }
-
-.placeInfo{
-  flex:0 0 auto;
-  text-align:center;
-}
-
+.placeInfo{ flex:0 0 auto; text-align:center; }
 .placeTitle{
   font-weight:400;
   color:var(--text-main);
@@ -203,7 +208,6 @@ body{
   line-height:1.05;
   margin-bottom:8px;
 }
-
 .mapLink{
   display:inline-flex;
   flex-direction:column;
@@ -211,18 +215,8 @@ body{
   gap:6px;
   text-decoration:none;
 }
-
-.mapIcon{
-  width:52px;
-  height:auto;
-  display:block;
-  opacity:.9;
-}
-
-.mapHint{
-  font-size:18px;
-  color:var(--text-soft);
-}
+.mapIcon{ width:52px; height:auto; display:block; opacity:.9; }
+.mapHint{ font-size:18px; color:var(--text-soft); }
 
 /* =========================
    MENÚ OVERLAY
@@ -249,6 +243,7 @@ body{
   font-size:22px;
   color:#fff;
   cursor:pointer;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .menuNav{
@@ -269,18 +264,7 @@ body{
   font-size:34px;
   color:rgba(255,255,255,.95);
   text-align:left;
-}
-
-/* =========================
-   PÁGINAS VACÍAS
-========================= */
-.blankPage{
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:42px;
-  color:var(--text-main);
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* =========================
@@ -297,16 +281,13 @@ body{
   gap:14px;
   text-align:center;
 }
-
 .busBlock{ display:flex; flex-direction:column; gap:10px; }
-
 .busTitle{
   font-size:clamp(22px, 5vw, 34px);
   color:var(--text-main);
   font-weight:400;
   line-height:1.05;
 }
-
 .busCard{
   background:rgba(0,0,0,.03);
   border:1px solid rgba(0,0,0,.06);
@@ -315,78 +296,18 @@ body{
   margin:0 auto;
   width:min(360px, 92%);
 }
+.busCardTitle{ font-size:clamp(16px, 3.8vw, 20px); color:var(--text-soft); line-height:1.2; }
+.busCardSub{ font-size:clamp(14px, 3.3vw, 18px); color:rgba(0,0,0,.45); margin-top:2px; }
+.busCardTime{ margin-top:6px; font-size:clamp(18px, 4vw, 22px); color:var(--text-main); }
+.busDivider{ display:flex; align-items:center; justify-content:center; gap:12px; opacity:.55; }
+.busDivider span{ height:1px; flex:1; background:rgba(0,0,0,.18); }
+.busDivider i{ font-style:normal; font-size:18px; color:rgba(0,0,0,.35); transform:translateY(-1px); }
+.busMapLink{ display:flex; flex-direction:column; align-items:center; gap:6px; text-decoration:none; }
+.busMapIcon{ width:46px; height:auto; opacity:.95; }
+.busMapHint{ font-size:16px; color:rgba(0,0,0,.42); }
+.busCity{ margin-top:2px; font-size:clamp(16px, 3.8vw, 20px); color:rgba(0,0,0,.5); }
 
-.busCardTitle{
-  font-size:clamp(16px, 3.8vw, 20px);
-  color:var(--text-soft);
-  line-height:1.2;
-}
-
-.busCardSub{
-  font-size:clamp(14px, 3.3vw, 18px);
-  color:rgba(0,0,0,.45);
-  margin-top:2px;
-}
-
-.busCardTime{
-  margin-top:6px;
-  font-size:clamp(18px, 4vw, 22px);
-  color:var(--text-main);
-}
-
-.busDivider{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  opacity:.55;
-}
-
-.busDivider span{
-  height:1px;
-  flex:1;
-  background:rgba(0,0,0,.18);
-}
-
-.busDivider i{
-  font-style:normal;
-  font-size:18px;
-  color:rgba(0,0,0,.35);
-  transform:translateY(-1px);
-}
-
-.busMapLink{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:6px;
-  text-decoration:none;
-}
-
-.busMapIcon{
-  width:46px;
-  height:auto;
-  opacity:.95;
-}
-
-.busMapHint{
-  font-size:16px;
-  color:rgba(0,0,0,.42);
-}
-
-.busCity{
-  margin-top:2px;
-  font-size:clamp(16px, 3.8vw, 20px);
-  color:rgba(0,0,0,.5);
-}
-
-/* Otros */
-.busWrap{
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 0 14px;
-}
-
+.busWrap{ max-width: 520px; margin: 0 auto; padding: 0 14px; }
 .otrosRow{
   display:grid;
   grid-template-columns: 1fr auto;
@@ -396,161 +317,18 @@ body{
   border-bottom: 1px solid rgba(0,0,0,0.10);
 }
 .otrosRow:last-child{ border-bottom: none; }
-
 .otrosLeft{ text-align:left; }
 .otrosRight{ text-align:right; }
-
 .otrosLink{
   text-decoration:none;
   color: rgba(0,0,0,.65);
   padding: 8px 10px;
   border-radius: 10px;
 }
-.otrosLink:active{
-  background: rgba(0,0,0,.06);
-}
+.otrosLink:active{ background: rgba(0,0,0,.06); }
 
 /* =========================
-   ITINERARIO (ICONOS PNG)
-   - centrado real
-   - línea fina
-   - iconos a la izquierda (sin círculo)
-========================= */
-
-.page[data-page="itinerario"] .itWrap{
-  max-width: 520px;
-  margin: 0 auto;
-  padding: 22px 18px 30px;
-  text-align: center;
-}
-
-.page[data-page="itinerario"] .itTitle{
-  font-size: clamp(34px, 7vw, 54px);
-  color: rgba(0,0,0,.65);
-  font-weight: 400;
-  margin: 6px 0 4px;
-}
-
-.page[data-page="itinerario"] .itDivider{
-  font-size: 28px;
-  line-height: 1;
-  margin: 6px 0 18px;
-  color: rgba(0,0,0,.22);
-}
-
-.page[data-page="itinerario"] .timeline{
-  width: min(360px, 92vw);
-  margin: 0 auto;
-  position: relative;
-  padding: 8px 0;
-  transform: translateX(105px);
-}
-
-/* Línea vertical (pegada a iconos) */
-.page[data-page="itinerario"] .timeline::before{
-  content:"";
-  position:absolute;
-  top: 0;
-  bottom: 0;
-  left: 72px;              /* controla dónde cae la línea */
-  width: 2px;
-  background: rgba(0,0,0,.18);
-  border-radius: 999px;
-}
-
-/* Fila: icono + texto */
-.page[data-page="itinerario"] .tlItem{
-  display: grid;
-  grid-template-columns: 72px 1fr;  /* igual que el left de la línea */
-  align-items: center;
-  gap: 26px;                        /* antes 18px -> más aire */
-  padding: 14px 0;
-}
-
-/* Icono (contenedor) */
-.page[data-page="itinerario"] .tlIcon{
-  width: 44px;
-  height: 44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  justify-self: end;
-}
-
-/* PNG */
-.page[data-page="itinerario"] .tlIcon img{
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  opacity: .75;
-  display:block;
-}
-
-/* Texto */
-.page[data-page="itinerario"] .tlContent{
-  text-align: left;
-}
-
-.page[data-page="itinerario"] .tlTime{
-  font-size: 22px;
-  color: rgba(0,0,0,.55);
-  line-height: 1.05;
-  white-space: nowrap;   /* clave: evita que "h" baje */
-}
-
-.page[data-page="itinerario"] .tlText{
-  font-size: 26px;
-  color: rgba(0,0,0,.70);
-  line-height: 1.05;
-  margin-top: 3px;
-}
-
-/* Dar aire entre iconos e línea */
-.page[data-page="itinerario"] .tlIcon{
-  margin-right: 14px;   /* 👈 separa icono de la línea */
-}
-
-/* móvil */
-@media (max-width: 380px){
-  .page[data-page="itinerario"] .timeline{
-    width: min(330px, 92vw);
-  }
-  .page[data-page="itinerario"] .timeline::before{
-    left: 58px;
-  }
-  .page[data-page="itinerario"] .tlItem{
-    grid-template-columns: 58px 1fr;
-    gap: 16px;
-  }
-  .page[data-page="itinerario"] .tlIcon{
-    width: 40px;
-    height: 40px;
-  }
-  .page[data-page="itinerario"] .tlIcon img{
-    width: 36px;
-    height: 36px;
-  }
-  .page[data-page="itinerario"] .tlTime{ font-size: 20px; }
-  .page[data-page="itinerario"] .tlText{ font-size: 24px; }
-}
-
-
-@media (max-width: 380px){
-  .page[data-page="itinerario"] .timeline{
-    width: min(330px, 92vw);
-  }
-  .page[data-page="itinerario"] .timeline::before{
-    left: 68px;
-  }
-  .page[data-page="itinerario"] .tlItem{
-    grid-template-columns: 68px 1fr;
-    gap: 22px;
-  }
-  .page[data-page="itinerario"] .tlTime{ white-space: nowrap; }
-}
-
-/* =========================
-   AGRADECIMIENTO (FINAL)
+   AGRADECIMIENTO
 ========================= */
 .page[data-page="agradecimiento"] .thanksWrap{
   height:100%;
@@ -563,199 +341,23 @@ body{
   gap:18px;
   text-align:center;
 }
-
 .page[data-page="agradecimiento"] .thanksText{
   font-size: clamp(22px, 5.4vw, 30px);
   line-height:1.32;
   color: rgba(0,0,0,.70);
   font-family:"Parisienne", cursive;
 }
-
 .page[data-page="agradecimiento"] .thanksIban{
   margin-top:6px;
   font-size: clamp(16px, 4vw, 20px);
   letter-spacing: 1.4px;
   color: rgba(0,0,0,.60);
-  font-family: "Cormorant Garamond", serif;
 }
 
 /* =========================
-   INVITACIÓN FULLSCREEN
+   INVITACIÓN FULLSCREEN (TRANSPARENTE + TRANSICIÓN)
 ========================= */
 .invFull{
-  position: fixed;
-  inset: 0;
-  background: #000;
-  z-index: 99999;
-
-  display: none;
-  align-items: center;
-  justify-content: center;
-
-  cursor: pointer;
-}
-
-.invFull.show{
-  display: flex;
-}
-
-.invFullImg{
-  width: 100vw;
-  height: 100vh;
-  object-fit: contain;
-
-  /* fuerza sensación horizontal */
-  transform: rotate(0deg);
-}
-
-.invImage{ cursor: pointer; }
-.invFull{ touch-action: manipulation; }
-.invFullImg{ -webkit-user-select: none; user-select: none; }
-
-/* Overlay invitación fullscreen */
-.invFull{
-  position: fixed;
-  inset: 0;
-  background: rgba(255,255,255,0); /* 👈 transparente */
-  backdrop-filter: blur(2px);      /* 👈 opcional, muy sutil */
-  -webkit-backdrop-filter: blur(2px);
-  z-index: 9999;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 320ms ease;
-}
-
-/* cuando se muestra */
-.invFull.show{
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.invFullImg{
-  max-width: 100vw;
-  max-height: 100vh;
-  object-fit: contain;
-
-  transform: scale(0.96);
-  opacity: 0;
-  transition: opacity 320ms ease, transform 320ms ease;
-}
-
-/* cuando se abre */
-.invFull.show .invFullImg{
-  opacity: 1;
-  transform: scale(1);
-}
-
-/* ===== HINT PORTADA INVITACIÓN ===== */
-.invImageWrap{
-  position: relative;
-}
-
-.invHintHome{
-  position: absolute;
-  left: 50%;
-  top: 16px;                 /* 👈 arriba */
-  transform: translateX(-50%);
-
-  padding: 10px 14px;
-  border-radius: 999px;
-
-  font-family: "Parisienne", cursive;
-  font-size: 14px;
-  color: rgba(0,0,0,.55);
-
-  opacity: 0;
-  pointer-events: none;
-
-  animation: invHomeHint 4s ease forwards;
-}
-
-@keyframes invHomeHint{
-  0%{
-    opacity: 0;
-    transform: translateX(-50%) translateY(8px);
-  }
-  10%{
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-  }
-  80%{
-    opacity: 1;
-  }
-  100%{
-    opacity: 0;
-  }
-}
-
-/* =========================
-   QUITAR AZUL (tap highlight) EN MÓVIL
-   - iOS/Safari principalmente
-========================= */
-
-/* El IMG que abre la invitación */
-#openInvFull{
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  touch-action: manipulation;
-}
-
-/* Por si el highlight cae en el contenedor */
-.invImageWrap,
-.homeFit{
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-}
-
-/* Evita “focus ring” raro en algunos navegadores */
-#openInvFull:focus{
-  outline: none;
-}
-
-/* =========================
-   QUITAR AZUL EN INVITACIÓN FULLSCREEN
-========================= */
-
-/* el overlay completo */
-#invFull{
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* la imagen horizontal */
-#invFullImg{
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-user-drag: none;
-  touch-action: manipulation;
-}
-
-#invFullImg:focus{
-  outline: none;
-}
-
-.page[data-page="itinerario"] .invImageWrap{
-  max-width: 600px;        /* antes 520px → más grande */
-}
-
-.page[data-page="itinerario"] .invImage{
-  transform: scale(1.08); /* ligero zoom elegante */
-}
-
-/* =========================
-   INVITACIÓN HORIZONTAL – FULL WIDTH
-========================= */
-
-#invFull{
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -764,22 +366,43 @@ body{
   align-items: center;
   justify-content: center;
 
-  background: transparent;
+  background: rgba(255,255,255,0);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 320ms ease;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* imagen horizontal */
-#invFullImg{
-  width: 100vw;        /* 👈 ocupa TODO el ancho */
+.invFull.show{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.invFullImg{
+  width: 100vw;      /* full ancho */
   height: auto;
-  max-height: 100vh;  /* no se sale en vertical */
+  max-height: 100vh;
 
   object-fit: contain;
   display: block;
+
+  transform: scale(0.96);
+  opacity: 0;
+  transition: opacity 320ms ease, transform 320ms ease;
 
   -webkit-user-select: none;
   user-select: none;
   -webkit-user-drag: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+.invFull.show .invFullImg{
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* =========================
@@ -800,11 +423,6 @@ body{
 }
 .giftBtn:hover{ opacity:1; }
 
-/* Para que ↻ siga a la derecha */
-.replayBtn{
-  margin-left: 6px; /* pequeño aire */
-}
-
 /* =========================
    OVERLAY SORPRESA
 ========================= */
@@ -814,12 +432,13 @@ body{
   z-index: 60;
   display: none;
 
-  background: rgba(255,255,255,.35);  /* transparente (no negro) */
+  background: rgba(255,255,255,.35);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
 
   opacity: 0;
   transition: opacity 220ms ease;
+
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -828,7 +447,6 @@ body{
   opacity: 1;
 }
 
-/* Tarjeta */
 .giftCard{
   position: absolute;
   left: 50%;
@@ -836,7 +454,7 @@ body{
   transform: translate(-50%, -50%);
 
   width: min(420px, 86vw);
-  padding: 18px 18px 14px;
+  padding: 14px;
 
   border-radius: 18px;
   background: rgba(255,255,255,.78);
@@ -844,8 +462,6 @@ body{
   box-shadow: 0 12px 40px rgba(0,0,0,.10);
 
   text-align: center;
-
-  /* animación suave */
   animation: giftIn 240ms ease both;
 }
 
@@ -854,13 +470,15 @@ body{
   to{ opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
-.giftTitle{
-  font-size: 30px;
-  color: rgba(0,0,0,.70);
-  margin-bottom: 8px;
+.giftImg{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 14px;
 }
 
 .giftText{
+  margin-top: 10px;
   font-size: 22px;
   line-height: 1.25;
   color: rgba(0,0,0,.62);
